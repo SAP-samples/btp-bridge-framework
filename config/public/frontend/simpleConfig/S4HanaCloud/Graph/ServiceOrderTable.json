@@ -1,0 +1,40 @@
+{
+  "pageType": "Table",
+  "title": "Service Orders",
+  "system": "S4HanaCloud",
+  "interface": "Graph",
+  "businessObject": "ServiceOrder",
+  "components": [
+    {
+      "type": "Table",
+      "system": "S4HanaCloud",
+      "interface": "Graph",
+      "businessObject": "ServiceOrder",
+      "searchable": true,
+      "interactive": true,
+      "maxItems": 10,
+      "columns": [
+        {
+          "content": "Serivce Order Number",
+          "key": "ServiceOrder",
+          "align": "start"
+        },
+        {
+          "content": "Sales Organization",
+          "key": "SalesOrganization",
+          "align": "start"
+        },
+        {
+          "content": "Service Order Start Date",
+          "key": "RequestedServiceStartDateTime",
+          "align": "start"
+        },
+        {
+          "content": "Service Order End Date",
+          "key": "RequestedServiceEndDateTime",
+          "align": "start"
+        }
+      ]
+    }
+  ]
+}

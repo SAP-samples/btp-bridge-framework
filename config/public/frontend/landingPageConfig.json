@@ -1,0 +1,48 @@
+{
+  "id": "landingPageConfig",
+  "path": "/",
+  "solutions": [
+    {
+      "key": 1,
+      "header": "Purchase Orders (S4HanaCloud IntegrationSuite)",
+      "description": "Find your PO's here",
+      "path": "/S4HanaCloud/IntegrationSuite/PurchaseOrderTable"
+    },
+    {
+      "key": 2,
+      "header": "Purchase Orders (S4HanaCloud Graph)",
+      "description": "Find your PO's here",
+      "path": "/S4HanaCloud/Graph/PurchaseOrderTable"
+    },
+    {
+      "key": 3,
+      "header": "Purchase Orders (S4HanaCloud Destination)",
+      "description": "Find your PO's here",
+      "path": "/S4HanaCloud/Destination/PurchaseOrderTable"
+    },
+    {
+      "key": 4,
+      "header": "Purchase Orders (S4HanaOnPrem IntegrationSuite)",
+      "description": "Find your PO's here",
+      "path": "/S4HanaOnPrem/IntegrationSuite/PurchaseOrderTable"
+    },
+    {
+      "key": 5,
+      "header": "Purchase Orders (S4HanaOnPrem Destination)",
+      "description": "Find your PO's here",
+      "path": "/S4HanaOnPrem/Destination/PurchaseOrderTable"
+    },
+    {
+      "key": 6,
+      "header": "Sales Orders (S4HanaCloud IntegrationSuite)",
+      "description": "Find your SO's here",
+      "path": "/S4HanaCloud/IntegrationSuite/SalesOrderTable"
+    },
+    {
+      "key": 7,
+      "header": "Service Orders (S4HanaCloud Graph)",
+      "description": "Find your SO's here",
+      "path": "/S4HanaCloud/Graph/ServiceOrderTable"
+    }
+  ]
+}

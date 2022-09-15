@@ -1,0 +1,83 @@
+{
+  "pageType": "Object",
+  "system": "S4HanaOnPrem",
+  "interface": "IntegrationSuite",
+  "businessObject": "PurchaseOrder",
+  "title": "Purchase Order",
+  "components": [
+    {
+      "type": "PropertyGrid",
+      "properties": [
+        {
+          "content": "Purchase Order ID",
+          "key": "PurchaseOrder"
+        },
+        {
+          "content": "Purchase Order Type",
+          "key": "PurchaseOrderType"
+        },
+        {
+          "content": "Purchasing Processing Status",
+          "key": "PurchasingProcessingStatus"
+        },
+        {
+          "content": "Created By User",
+          "key": "CreatedByUser"
+        },
+        {
+          "content": "Creation Date",
+          "key": "CreationDate"
+        },
+        {
+          "content": "Supplier",
+          "key": "Supplier"
+        },
+        {
+          "content": "Net Payment Days",
+          "key": "NetPaymentDays"
+        },
+        {
+          "content": "Purchasing Group",
+          "key": "PurchasingGroup",
+          "editable": true
+        },
+        {
+          "content": "Address Name",
+          "key": "AddressName",
+          "editable": true
+        },
+        {
+          "content": "Address Phone Number",
+          "key": "AddressPhoneNumber",
+          "editable": true
+        }
+      ]
+    },
+    {
+      "type": "Table",
+      "title": "Purchase Order Items",
+      "interactive": true,
+      "system": "S4HanaOnPrem",
+      "interface": "IntegrationSuite",
+      "businessObject": "PurchaseOrder/PurchaseOrderItem",
+      "columns": [
+        {
+          "content": "Item Number",
+          "key": "PurchaseOrderItem"
+        },
+        {
+          "content": "Item Text",
+          "key": "PurchaseOrderItemText"
+        },
+        {
+          "content": "Currency",
+          "key": "DocumentCurrency"
+        },
+        {
+          "content": "Net Price Amount",
+          "key": "NetPriceAmount"
+        }
+      ]
+    }
+  ]
+}

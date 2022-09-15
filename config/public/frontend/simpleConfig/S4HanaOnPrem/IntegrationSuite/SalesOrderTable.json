@@ -1,0 +1,40 @@
+{
+  "title": "Sales Orders",
+  "system": "S4HanaOnPrem",
+  "interface": "IntegrationSuite",
+  "businessObject": "SalesOrder",
+  "pageType": "Table",
+  "components": [
+    {
+      "type": "Table",
+      "system": "S4HanaOnPrem",
+      "interface": "IntegrationSuite",
+      "businessObject": "SalesOrder",
+      "searchable": true,
+      "interactive": true,
+      "maxItems": 10,
+      "columns": [
+        {
+          "content": "Sales Order Number",
+          "key": "SalesOrder"
+        },
+        {
+          "content": "Sold To Party",
+          "key": "SoldToParty"
+        },
+        {
+          "content": "Creation Date",
+          "key": "CreationDate"
+        },
+        {
+          "content": "Created By User",
+          "key": "CreatedByUser"
+        },
+        {
+          "content": "Total Net Amount",
+          "key": "TotalNetAmount"
+        }
+      ]
+    }
+  ]
+}

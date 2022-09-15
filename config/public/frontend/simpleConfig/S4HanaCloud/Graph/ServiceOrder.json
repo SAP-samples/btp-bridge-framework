@@ -1,0 +1,82 @@
+{
+  "pageType": "Object",
+  "system": "S4HanaCloud",
+  "interface": "Graph",
+  "businessObject": "ServiceOrder",
+  "title": "Service Order",
+  "components": [
+    {
+      "type": "PropertyGrid",
+      "properties": [
+        {
+          "content": "Service Order ID",
+          "key": "ServiceOrder"
+        },
+        {
+          "content": "Service Order Type",
+          "key": "ServiceOrderType"
+        },
+        {
+          "content": "Service Order Description",
+          "key": "ServiceOrderDescription",
+          "editable": true
+        },
+        {
+          "content": "Sales Organization",
+          "key": "SalesOrganization",
+          "editable": true
+        },
+        {
+          "content": "Sold To",
+          "key": "SoldToParty"
+        },
+        {
+          "content": "Ship To",
+          "key": "ShipToParty"
+        },
+        {
+          "content": "Service Date Start",
+          "key": "RequestedServiceStartDateTime"
+        },
+        {
+          "content": "Service Date End",
+          "key": "RequestedServiceEndDateTime"
+        },
+        {
+          "content": "Service Net Amount",
+          "key": "ServiceDocNetAmount"
+        }
+      ]
+    },
+    {
+      "type": "Table",
+      "title": "Service Order Items",
+      "interactive": true,
+      "system": "S4HanaCloud",
+      "interface": "Graph",
+      "businessObject": "ServiceOrder/ServiceOrderItem",
+      "columns": [
+        {
+          "content": "Item Number",
+          "key": "ServiceOrderItem",
+          "align": "start"
+        },
+        {
+          "content": "Item Text",
+          "key": "ServiceOrderItemDescription",
+          "align": "start"
+        },
+        {
+          "content": "Item Duration",
+          "key": "ServiceDuration",
+          "align": "start"
+        },
+        {
+          "content": "Quantity",
+          "key": "Quantity",
+          "align": "start"
+        }
+      ]
+    }
+  ]
+}
