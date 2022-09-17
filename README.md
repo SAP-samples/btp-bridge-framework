@@ -1,8 +1,6 @@
 # Bridge Framework for SAP S/4HANA and Microsoft Teams
 
-<!--- Register repository https://api.reuse.software/register, then add REUSE badge:
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/REPO-NAME)](https://api.reuse.software/info/github.com/SAP-samples/REPO-NAME)
--->
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-bridge-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-bridge-framework)
 
 ## Description
 The Bridge Framework is an integration framework deployed on SAP BTP that allows developers to quickly customize and deploy apps that bring the powerful business logic of SAP products to the convenience of Microsoft Teams.
@@ -23,7 +21,7 @@ The Bridge Framework supports integrating with SAP systems through BTP services 
 No known issues.
 
 ## How to obtain support
-[Create an issue](https://github.com/SAP-samples/s4hana-bridge-framework-msteams/issues) in this repository if you find a bug or have questions about the content.
+[Create an issue](https://github.com/SAP-samples/btp-bridge-framework/issues) in this repository if you find a bug or have questions about the content.
  
 For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
 
