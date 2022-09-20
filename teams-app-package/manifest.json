@@ -15,12 +15,12 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "s4hana",
-    "full": "s4"
+    "short": "Bridge Framework App",
+    "full": "Bridge Framework App"
   },
   "description": {
     "short": "Bridge Framework",
-    "full": "Bridge Framework for S/4HANA"
+    "full": "SAP integration app built using Bridge Framework."
   },
   "accentColor": "#FFFFFF",
   "bots": [
@@ -40,7 +40,7 @@
           "id": "showDialog",
           "type": "action",
           "title": "Show Dialog",
-          "description": "S/4 dialog",
+          "description": "Bridge Dialog",
           "initialRun": false,
           "fetchTask": true,
           "context": ["commandBox", "compose", "message"],
@@ -62,7 +62,7 @@
               "*.ngrok.io",
               "*.hana.ondemand.com",
               "*.cfapps.{{CF_REGION}}.hana.ondemand.com",
-              "bridgeimg.blob.core.windows.net"
+              "{{YOUR_BLOB_STORAGE_URL}}"
             ]
           }
         }
@@ -76,7 +76,7 @@
     "*.botframework.com",
     "*.hana.ondemand.com",
     "*.cfapps.{{CF_REGION}}.hana.ondemand.com",
-    "bridgeimg.blob.core.windows.net"
+    "{{YOUR_BLOB_STORAGE_URL}}"
   ],
   "webApplicationInfo": {
     "id": "{{APPLICATION_ID}}",

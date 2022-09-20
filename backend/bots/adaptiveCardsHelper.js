@@ -179,7 +179,7 @@ class AdaptiveCardsHelper {
                       width: "Auto",
                       height: "16px",
                       url:
-                        "https://bridgeimg.blob.core.windows.net/adaptive-card/logo_withText.png?" +
+                        "{{YOUR_BLOB_STORAGE_URL}}" +
                         env.blobSAS,
                     },
                   ],
@@ -229,37 +229,6 @@ class AdaptiveCardsHelper {
     return card;
   };
 
-  async getTicketDetailCard(ticket) {
-    const adaptive = CardFactory.adaptiveCard({
-      $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
-      type: "AdaptiveCard",
-      version: "1.3",
-      body: [
-        {
-          type: "TextBlock",
-          text: ticket.Name,
-          size: "large",
-        },
-        {
-          type: "TextBlock",
-          text: "ID: " + ticket.ID,
-        },
-        {
-          type: "TextBlock",
-          text: "Buyer Name: " + ticket.BuyerMainContactPartyName,
-        },
-      ],
-
-      actions: [
-        {
-          type: "Action.OpenUrl",
-          title: "Open Ticket",
-          url: env.c4cTenantUrl,
-        },
-      ],
-    });
-    return adaptive;
-  }
 }
 
 module.exports = new AdaptiveCardsHelper();
