@@ -1,0 +1,12 @@
+---
+applications:
+  - name: ms-teams-us10-backend
+    memory: 512M
+    disk_quota: 512M
+    buildpack: nodejs_buildpack
+    command: npm start
+    services:
+      - ms-teams-us10-destination
+      - ms-teams-us10-connectivity
+      - ms-teams-us10-xsuaa
+      - ms-teams-us10-app-logger

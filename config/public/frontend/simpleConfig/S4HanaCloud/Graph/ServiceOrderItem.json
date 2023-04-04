@@ -1,0 +1,30 @@
+{
+  "pageType": "Object",
+  "system": "S4HanaCloud",
+  "interface": "Graph",
+  "businessObject": "ServiceOrder/ServiceOrderItem",
+  "title": "Service Order Item",
+  "components": [
+    {
+      "type": "PropertyGrid",
+      "properties": [
+        {
+          "content": "Service Order ID",
+          "key": "ServiceOrderItem"
+        },
+        {
+          "content": "Service Order Item Category",
+          "key": "ServiceObjectType"
+        },
+        {
+          "content": "Service Order Item Text",
+          "key": "ServiceOrderItemDescription"
+        },
+        {
+          "content": "Service Duration",
+          "key": "ServiceDuration"
+        }
+      ]
+    }
+  ]
+}

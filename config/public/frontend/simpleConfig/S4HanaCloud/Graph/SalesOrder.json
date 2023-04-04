@@ -1,0 +1,83 @@
+{
+  "pageType": "Object",
+  "system": "S4HanaCloud",
+  "interface": "Graph",
+  "businessObject": "SalesOrder",
+  "title": "Sales Order",
+  "components": [
+    {
+      "type": "PropertyGrid",
+      "properties": [
+        {
+          "content": "Sales Order ID",
+          "key": "SalesOrder"
+        },
+        {
+          "content": "DistributionChannel",
+          "key": "DistributionChannel"
+        },
+        {
+          "content": "Sales Order Type",
+          "key": "SalesOrderType"
+        },
+        {
+          "content": "Created By User",
+          "key": "CreatedByUser"
+        },
+        {
+          "content": "Creation Date",
+          "key": "CreationDate"
+        },
+        {
+          "content": "Last Change Date",
+          "key": "LastChangeDate"
+        },
+        {
+          "content": "Order Reason",
+          "key": "SDDocumentReason",
+          "inputType": "TextInput"
+        },
+        {
+          "content": "Customer Reference",
+          "key": "PurchaseOrderByCustomer",
+          "inputType": "TextInput"
+        },
+        {
+          "content": "Customer Group",
+          "key": "CustomerGroup",
+          "inputType": "TextInput"
+        }
+      ]
+    },
+    {
+      "type": "Table",
+      "title": "Sales Order Items",
+      "interactive": true,
+      "system": "S4HanaCloud",
+      "interface": "Graph",
+      "businessObject": "SalesOrder/SalesOrderItem",
+      "columns": [
+        {
+          "content": "Item Number",
+          "key": "SalesOrderItem",
+          "align": "start"
+        },
+        {
+          "content": "Item Text",
+          "key": "SalesOrderItemText",
+          "align": "start"
+        },
+        {
+          "content": "Quantity",
+          "key": "RequestedQuantity",
+          "align": "start"
+        },
+        {
+          "content": "Net Amount",
+          "key": "NetAmount",
+          "align": "end"
+        }
+      ]
+    }
+  ]
+}

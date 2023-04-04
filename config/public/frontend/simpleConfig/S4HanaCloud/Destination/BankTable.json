@@ -1,0 +1,40 @@
+{
+    "pageType": "Table",
+    "title": "Bank Master Data",
+    "system": "S4HanaCloud",
+    "interface": "Destination",
+    "businessObject": "Bank",
+    "components": [
+      {
+        "type": "Table",
+        "system": "S4HanaCloud",
+        "interface": "Destination",
+        "businessObject": "Bank",
+        "keys": ["BankCountry", "BankInternalID"],
+        "searchable": true,
+        "interactive": true,
+        "columns": [
+          {
+            "content": "Bank Country",
+            "key": "BankCountry",
+            "align": "start"
+          },
+          {
+            "content": "Bank Internal ID",
+            "key": "BankInternalID",
+            "align": "start"
+          },
+          {
+            "content": "Bank Name",
+            "key": "BankName",
+            "align": "start"
+          },
+          {
+            "content": "SWIFT Code",
+            "key": "SWIFTCode",
+            "align": "start"
+          }
+        ]
+      }
+    ]
+  }

@@ -1,0 +1,34 @@
+{
+  "pageType": "Object",
+  "system": "S4HanaOnPrem",
+  "interface": "Destination",
+  "businessObject": "SalesOrder/SalesOrderItem",
+  "title": "Sales Order Item",
+  "components": [
+    {
+      "type": "PropertyGrid",
+      "properties": [
+        {
+          "content": "Sales Order ID",
+          "key": "SalesOrderItem"
+        },
+        {
+          "content": "Sales Order Item Category",
+          "key": "SalesOrderItemCategory"
+        },
+        {
+          "content": "Sales Order Item Text",
+          "key": "SalesOrderItemText"
+        },
+        {
+          "content": "Purchase Order By Customer",
+          "key": "PurchaseOrderByCustomer"
+        },
+        {
+          "content": "Requested Quantity",
+          "key": "RequestedQuantity"
+        }
+      ]
+    }
+  ]
+}
