@@ -1,6 +1,6 @@
-# Bridge Framework for SAP S/4HANA and Microsoft Teams
-
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-bridge-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-bridge-framework)
+
+# Bridge Framework for SAP S/4HANA and Microsoft Teams
 
 ![Bridge Framework Image](./documentation/bridge-framework-main.png)
 
