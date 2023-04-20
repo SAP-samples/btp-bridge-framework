@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
   "manifestVersion": "1.8",
   "version": "8.0.0",
-  "id": "{{Microsft-Azure-Bot-Service-ID}}",
+  "id": "<YOUR_BOT_ID>",
   "packageName": "com.sap.teams.chat.export",
   "developer": {
     "name": "SAP",
@@ -25,15 +25,19 @@
   "accentColor": "#019CE0",
   "bots": [
     {
-      "botId": "{{Microsft-Azure-Bot-Service-ID}}",
-      "scopes": ["team", "personal", "groupchat"],
-      "isNotificationOnly": false,
+      "botId": "<YOUR_BOT_ID>",
+      "scopes": [
+        "team",
+        "personal",
+        "groupchat"
+      ],
+      "isNotificationOnly": true,
       "supportsFiles": true
     }
   ],
   "composeExtensions": [
     {
-      "botId": "{{Microsft-Azure-Bot-Service-ID}}",
+      "botId": "<YOUR_BOT_ID>",
       "canUpdateConfiguration": false,
       "commands": [
         {
@@ -43,7 +47,11 @@
           "description": "Launch Bridge Framework",
           "initialRun": false,
           "fetchTask": true,
-          "context": ["commandBox", "compose", "message"],
+          "context": [
+            "commandBox",
+            "compose",
+            "message"
+          ],
           "parameters": [
             {
               "name": "param",
@@ -59,7 +67,6 @@
           "value": {
             "domains": [
               "*.botframework.com",
-              "*.ngrok.io",
               "*.hana.ondemand.com",
               "*.cfapps.{{CF_REGION}}.hana.ondemand.com"
             ]
@@ -68,18 +75,21 @@
       ]
     }
   ],
-  "permissions": ["identity", "messageTeamMembers"],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
   "validDomains": [
     "*.githubusercontent.com",
-    "*.ngrok.io",
     "*.botframework.com",
-    "*.fusebit.io",
     "*.hana.ondemand.com",
     "*.cfapps.{{CF_REGION}}.hana.ondemand.com"
   ],
   "webApplicationInfo": {
-    "id": "{{Microsft-Azure-Bot-Service-ID}}",
-    "resource": "api://{{FRONTEND_URL}}/botid-{{Microsft-Azure-Bot-Service-ID}}",
-    "applicationPermissions": ["OnlineMeeting.ReadBasic.Chat"]
+    "id": "<YOUR_BOT_ID>",
+    "resource": "api://<YOUR_FRONTEND_URL>/botid-<YOUR_BOT_ID>",
+    "applicationPermissions": [
+      "OnlineMeeting.ReadBasic.Chat"
+    ]
   }
 }
