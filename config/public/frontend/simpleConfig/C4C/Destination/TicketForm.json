@@ -1,0 +1,29 @@
+{
+  "pageType": "Form",
+  "system": "C4C",
+  "interface": "Destination",
+  "businessObject": "Ticket",
+  "title": "Create Ticket",
+  "properties": [
+    {
+      "content": "ID",
+      "key": "ID"
+    },
+    {
+      "content": "ObjectID",
+      "key": "ObjectID"
+    },
+    {
+      "content": "Name",
+      "key": "Name",
+      "inputType": "TextInput",
+      "placeholder": "Ticket Name"
+    },
+    {
+      "content": "Issue Category ID",
+      "key": "ServiceIssueCategoryID",
+      "inputType": "TextInput",
+      "placeholder": "GS"
+    }
+  ]
+}

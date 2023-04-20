@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+.vscode
+*pycache*
+*.log
+env/
+*.xml
+S4HANA\*
+btp-azure-trust/
+embed-ui-samples/
+sap-graph/
+setup-s4hana-principal-propagation/

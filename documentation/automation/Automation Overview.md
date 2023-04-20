@@ -1,0 +1,198 @@
+# Automated Setup
+
+Users are encouraged to use the automated setup, as it saves times and greatly reduces complexity. That being said, this tool will not be able to setup the entirety of Bridge Framework due to some limitations with the systems Bridge connects to.
+
+Automated setup will configure your BTP space and subaccount, as well as your resources in Azure. To see what steps you still need to setup by hand, for your use case, please refer to step 3 of [this guide](../manual-setup/manual-setup.md).
+
+## Prereqs
+
+Before jumping into the automated setup, users will need to have a few things already installed on their computer.
+
+Here's a list of what you'll need:
+ - Docker Image for Automated Setup (find that on our repo)
+ - [Docker Engine](./prereqs/docker-install.md)
+ - [VSCode](./prereqs/vscode-install.md) (not required, but strongly recommended)
+
+## Booting Up the Container
+
+After downloading the gzipped docker image from our repository, you can load the image into Docker with the following command:
+
+```
+docker load -i ./bridge-automation-pipeline.tar.gz
+```
+
+To then build and run the container, use the following command:
+
+```
+docker container run -e BTPSA_VERSION_GIT="\$(git describe --long --tags  --always)" --rm  -it -d --name bridge-automation-pipeline bridge-automation-pipeline
+```
+
+### Connect with VSCode
+
+You can then connect to the container via VSCode and the Dev Containers extension. To do so, open the command palette (Windows: Ctrl+Shift+P; Mac: Cmd+Shift+P) and select the `Remote Containers: Attach to Running Container...` command. Attach to the container by name, in this case it should be `bridge-automation-pipeline`. This option might only work after using Docker or installing and connecting to this Docker container.
+
+Note that if this option is not present, you should be able to connect to the container by using the UI version of the Dev Containers extension. Click on the logo that looks like a monitor with a disconnected symbol on it (located on the left side panel) - if you hover over the logo, it should say `Remote Explorer`. From there you should be presented with a drop down called Other Containers with should have `bridge-automation-pipeline` underneath it. To connect, click on the window icon with a plus on it (to the right of the bridge-automation-pipeline). Then press `Got It` in the following pop up. The container should now load up.
+
+Once the container loads up, you may need to select the default directory. To do so, you can click on `Open Folder` button and then press enter (this should default to `/home/user` for the home path of the docker container).
+
+### Connect with Terminal
+
+To remote into the Docker container using the command line, run the following command:
+
+```
+docker exec -it bridge-automation-pipeline ash
+```
+
+`bridge-automation-pipeline` is the name of the running container and `ash` is the type of terminal that will be running inside of the container.
+
+## Configuration
+
+### parameters.json
+
+This configuration file points the automated tool to your BTP global account, subaccount, and Cloud Foundry space.
+
+You will need to configure the following fields:
+
+```
+"region": region,
+"globalaccount": globalAccountId,
+"subaccountid": subaccountId,
+"subaccountname": subaccountName,
+"orgid": organizationId,
+"org": organization,
+"cfcliapihostregion": hostRegion,
+"cfspacename": cfSpaceName,
+"myemail": email,
+```
+
+`region` should be set to the region for SAP BTP subaccount. This can be found within the subaccount. It should be contained in url (they follow this format: `https://api.cf.<region>.hana.ondemand.com`) of your default cf space. **Note:** if your region is something like `us10-001`, only use the prefix, which is just `us10` in this case. This can also be configured when creating a subaccount.
+
+`globalAccountId` should be set to your SAP BTP global account. This can be found under the `Global Account Subdomain` field after pressing settings (gear icon located at the top right of the screen) at the global account level.
+
+`subaccountId` should be set to the subaccount id of SAP BTP subaccount. This can be found under the `General` section of a subaccount.
+
+`subaccountName` should be set to the name of the subaccount.
+
+`organizationId` should be set to the value of `Org ID`. This can be found in the `Cloud Foundry Environment` section under the subaccount.
+
+`organization` should be set to `Org Name`. This can also be be found in the `Cloud Foundry Environment` section under the subaccount.
+
+`hostRegion` should be set to the full value of region from the aforementioned url: `https://api.cf.<region>.hana.ondemand.com`.
+
+`cfcliapicfSpaceName` should be set to the cf space name that needs to be configured.
+
+`email` should be set to your user email tied to BTP cockpit.
+
+Additionally, you can configure and set roles to users in your BTP account now. To allocate who gets the roles, simply add another user group object in the array of the `myusergroups` field. This object looks like this:
+
+```
+{
+    "name": "auditors",
+    "members": ["captain@america.com"]
+},
+```
+
+Where the `name` field is the label for your user group and the `members` field is an array of emails to add to that user group. The definition of the user group occurs in the `default.json` file - [see that section](#defaultjson) for more details.
+
+### manifest.yaml
+
+This is the main manifest file for your Cloud Foundry apps. Notice, that each application (frontend, backend, and config) has its own manifest within the Bridge folder (labeled as `btp-bridge-framework/` within the docker container). The individual manifests allow you to re-deploy, and, therefore, update each application individually. They are not pre-configured. The main manifest is and looks like so:
+
+```
+---
+applications:
+  - name: bridge-framework-backend
+    memory: 512M
+    disk_quota: 512M
+    path: /home/user/btp-bridge-framework/backend
+    buildpacks: 
+      - nodejs_buildpack
+    command: npm start
+    services:
+      - bridge-framework-destination
+      - bridge-framework-connectivity
+      - bridge-framework-xsuaa
+      - bridge-framework-app-logger
+  - name: bridge-framework-config
+    memory: 64M
+    disk_quota: 64M
+    path: /home/user/btp-bridge-framework/config
+    buildpacks:
+      - staticfile_buildpack
+  - name: bridge-framework-frontend
+    memory: 64M
+    disk_quota: 64M
+    path: /home/user/btp-bridge-framework/frontend/build
+    buildpacks: 
+      - staticfile_buildpack
+```
+
+Should you configure the manifests tied to each application, the name in those files should match the name of the application from this file.
+
+### default.json
+
+This configuration file defines all of the BTP services that Bridge will use and how automated tool will run. The only configuration that may need to be edited here is the following field (located at the bottom of the file): `"assignrolecollections":`.
+
+If you need to add a role collection beyond what already exists (rare occurrence), you will have to define a role collection object within this array. A role collection object looks like this:
+
+```
+{
+    "name": "Enterprise Messaging Administrator",
+    "type": "account",
+    "level": "sub account",
+    "assignedUserGroupsFromParameterFile": ["admins"]
+},
+```
+
+The first three fields match the same fields for a role in the BTP cockpit. The last field, `assignedUserGroupsFromParameterFile`, is a pointer to the user groups defined in the `parameters.json` file, and is how we added users to this role collection. **Note:** any role collections specified here will be added to the user who is running the pipeline by default!
+
+Additionally, this feature is still being used experimentally, so we recommend double checking the BTP cockpit that any additionally roles you define are correctly allocated.
+
+## Run the Container
+
+Before running the container, it is suggested that all configuration should be completed. This includes the configuration of what use case you plan on employing for Bridge as well. It is advised that you double check your configurations at this point.
+
+To run the container, simply trigger `./btpsa` from the command line. During the execution of the container you will be prompted with authentication links to verify that it is your using your BTP and Azure accounts.
+
+There are three types of links that you will encounter throughout the duration of the pipeline. Details on how to handle each type of link will be provided below.
+
+### BTP Login Authentication
+
+The first type of link is a BTP login link. It will look something like this in the terminal:
+
+```
+[2022-12-03 01:01:35] RUN COMMAND: btp login --url 'https://cpcli.cf.eu10.hana.ondemand.com' --subdomain <subdomain-name> --sso
+Connecting to CLI server at https://cpcli.cf.eu10.hana.ondemand.com...
+
+Opening browser for authentication at: https://cpcli.cf.eu10.hana.ondemand.com/login/v2.24.0/browser/<uuid>
+
+Failed to open browser. Please authenticate manually.
+Waiting for user authentication to complete (use Ctrl+C to abort)...
+```
+
+To continue, open the link inside the statement `Opening browser for authentication at: https://cpcli.cf.eu10.hana.ondemand.com/login/v2.24.0/browser/<uuid>`. To open the link from the VSCode terminal, click on it while holding down command (control for Windows). This will redirect to a page that will have a button in the middle of the screen with the title `Proceed and log in` or `Yes, log in to SAP BTP`. Click on that to complete authentication.
+
+### Azure Device Codes
+
+You will be asked for 3-4 Azure device codes, depending on the type of automated setup you run. Nonetheless, each time this occurs, you will see a prompt that will look similar to the following in the terminal:
+
+```
+WARNING: To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code <device_code> to authenticate.
+```
+
+All you have to do is copy the `<device_code>` and enter that on the device login page, specified by the link provided (which is https://microsoft.com/devicelogin). You may get re-directed to a user selection page, when navigating to the device login url. Simply select the user account that you are using to setup Bridge. It may ask for your password to confirm you are that user, go ahead and enter it. After all of this, press `Continue` to allow your user access to the API tools that the automated setup will use.
+
+### Cloud Foundry Authentication
+
+The last type of authentication link you will see if from Cloud Foundry. It will look like this:
+
+```
+Temporary Authentication Code ( Get one at https://login.cf.us10.hana.ondemand.com/passcode ):
+```
+
+Open the link in your browser, it should redirect you to a button with your account on it, click on it. This should then reveal a code, copy the code, paste it into the terminal, and press enter!
+
+## Error During Execution
+
+Should an error occur during the execution of the automated setup, please check the `log/` folder for more details. We recommended checking `script.log` in this folder first. We also recommend double checking your configuration files for the pipeline, as most errors result from incorrect values here. If a specific error was not found, you can always try to re-run the automated setup tool. However, if the error persists, please reach out to alex.bishka@sap.com or submit an issue. Make sure to describe the error, detail which part of the pipeline it occurred, and submit all of the logs from the `log/` directory.
+

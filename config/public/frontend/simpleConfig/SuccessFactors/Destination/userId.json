@@ -1,0 +1,42 @@
+{
+    "pageType": "Object",
+    "system": "SuccessFactors",
+    "interface": "Destination",
+    "businessObject": "userId",
+    "title": "User",
+    "components": [
+        {
+            "type": "PropertyGrid",
+            "properties": [
+                {
+                    "content": "User ID",
+                    "key": "userId"
+                },
+                {
+                    "content": "First",
+                    "key": "firstName"
+                },
+                {
+                    "content": "Last",
+                    "key": "lastName"
+                },
+                {
+                    "content": "Email",
+                    "key": "email"
+                },
+                {
+                    "content": "Hire Date",
+                    "key": "hireDate"
+                },
+                {
+                    "content": "Location",
+                    "key": "location"
+                },
+                {
+                    "content": "Key Position",
+                    "key": "keyPosition"
+                }
+            ]
+        }
+    ]
+}

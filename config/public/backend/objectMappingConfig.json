@@ -1,0 +1,287 @@
+{
+  "S4HanaCloud": {
+    "IntegrationSuite": {
+      "PurchaseOrder": {
+        "iFlowKeys": ["poNumber"],
+        "searchUrl": "/http/s4hana-cloud/SearchPurchaseOrders",
+        "getUrl": "/http/s4hana-cloud/GetPurchaseOrder",
+        "updateUrl": "/http/s4hana-cloud/UpdatePurchaseOrder",
+        "searchFields": ["PurchaseOrder", "CompanyCode", "Supplier"],
+        "updateFields": [
+          "PurchasingGroup",
+          "PurchasingOrganization",
+          "PurchasingProcessingStatus",
+          "AddressName",
+          "AddressPhoneNumber"
+        ]
+      },
+      "PurchaseOrderItem": {
+        "iFlowKeys": ["itemNumber"],
+        "searchUrl": "/http/s4hana-cloud/SearchPurchaseOrderItems",
+        "getUrl": "/http/s4hana-cloud/GetPurchaseOrderItem",
+        "searchFields": ["Material"],
+        "updatedFields": ["TaxJurisdiction"],
+
+        "valuehelpUrl": "/http/s4hana-cloud/valuehelp",
+        "valueHelp": {
+          "url": "/MM_PUR_PO_MAINT_V2_SRV",
+          "mapping": [
+            {
+              "field": "TaxCode",
+              "uri": "/C_MM_TaxCodeValueHelp"
+            },
+            {
+              "field": "TaxJurisdiction",
+              "uri": "/C_MM_TaxJurisdictionVH"
+            }
+          ]
+        }
+      },
+      "SalesOrder": {
+        "iFlowKeys": ["soNumber"],
+        "searchUrl": "/http/s4hana-cloud/SearchSalesOrders",
+        "getUrl": "/http/s4hana-cloud/GetSalesOrder",
+        "updateUrl": "/http/s4hana-cloud/UpdateSalesOrder",
+        "searchFields": ["SalesOrder"],
+        "updateFields": [
+          "CustomerGroup",
+          "SDDocumentReason",
+          "PurchaseOrderByCustomer"
+        ]
+      },
+      "SalesOrderItem": {
+        "iFlowKeys": ["itemNumber"],
+        "searchUrl": "/http/s4hana-cloud/SearchSalesOrderItems",
+        "getUrl": "/http/s4hana-cloud/GetSalesOrderItem",
+        "searchFields": ["Material"]
+      }
+    },
+    "Graph": {
+      "PurchaseOrder": {
+        "url": "https://us10.graph.sap/api/v1/sap.s4/A_PurchaseOrder",
+        "searchFields": ["PurchaseOrder", "CompanyCode", "Supplier"],
+        "updateFields": [
+          "PurchasingGroup",
+          "PurchasingOrganization",
+          "PurchasingProcessingStatus",
+          "AddressName",
+          "AddressPhoneNumber"
+        ]
+      },
+      "PurchaseOrderItem": {
+        "suffix": "to_PurchaseOrderItem",
+        "searchFields": ["PurchaseOrderItem"]
+      },
+      "SalesOrder": {
+        "url": "https://us10.graph.sap/api/v1/sap.s4/A_SalesOrder",
+        "searchFields": ["SalesOrder"],
+        "updateFields": [
+          "CustomerGroup",
+          "SDDocumentReason",
+          "PurchaseOrderByCustomer"
+        ]
+      },
+      "SalesOrderItem": {
+        "suffix": "to_Item",
+        "searchFields": ["SalesOrderItem"]
+      },
+      "ServiceOrder": {
+        "url": "https://us10.graph.sap/api/v1/sap.s4/A_ServiceOrder",
+        "searchFields": ["ServiceOrder"],
+        "updateFields": ["ServiceOrderDescription", "SalesOrganization"]
+      },
+      "ServiceOrderItem": {
+        "suffix": "to_Item",
+        "searchFields": ["ServiceOrderItem"]
+      }
+    },
+    "Destination": {
+      "PurchaseOrder": {
+        "destinationName": "s4hana-cloud-basic-auth",
+        "accessToken": false,
+        "url": "/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder",
+        "searchFields": ["PurchaseOrder", "CompanyCode", "Supplier"],
+        "updateFields": [
+          "PurchasingGroup",
+          "PurchasingOrganization",
+          "PurchasingProcessingStatus",
+          "AddressName",
+          "AddressPhoneNumber"
+        ]
+      },
+      "PurchaseOrderItem": {
+        "destinationName": "s4hana-cloud-basic-auth",
+        "accessToken": false,
+        "url": "/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrderItem",
+        "suffix": "to_PurchaseOrderItem",
+        "searchFields": ["PurchaseOrderItem"],
+        "valueHelp": {
+          "url": "/MM_PUR_PO_MAINT_V2_SRV",
+          "mapping": [
+            {
+              "field": "TaxCode",
+              "uri": "/C_MM_TaxCodeValueHelp?$format=json"
+            },
+            {
+              "field": "TaxJurisdiction",
+              "uri": "/C_MM_TaxJurisdictionVH?$format=json"
+            }
+          ]
+        }
+      },
+      "SalesOrder": {
+        "destinationName": "s4hana-cloud-basic-auth",
+        "accessToken": false,
+        "url": "/API_SALES_ORDER_SRV/A_SalesOrder",
+        "searchFields": ["SalesOrder"],
+        "updateFields": [
+          "CustomerGroup",
+          "SDDocumentReason",
+          "PurchaseOrderByCustomer"
+        ]
+      },
+      "SalesOrderItem": {
+        "suffix": "to_Item",
+        "searchFields": ["SalesOrderItem"]
+      },
+      "Bank": {
+        "destinationName": "s4hana-cloud-basic-auth",
+        "accessToken": false,
+        "url": "/api_bank/srvd_a2x/sap/bank/0002/Bank",
+        "pathParams": ["BankCountry", "BankInternalID"],
+        "searchFields": ["BankCountry", "BankInternalID", "SWIFTCode"],
+        "updateFields": [
+          "SWIFTCode"
+        ]
+      }
+    }
+  },
+  "S4HanaOnPrem": {
+    "IntegrationSuite": {
+      "PurchaseOrder": {
+        "iFlowKeys": ["poNumber"],
+        "searchUrl": "/http/s4hana-onprem/SearchPurchaseOrders",
+        "getUrl": "/http/s4hana-onprem/GetPurchaseOrder",
+        "updateUrl": "/http/s4hana-onprem/UpdatePurchaseOrder",
+        "searchFields": ["PurchaseOrder", "CompanyCode", "Supplier"],
+        "updateFields": [
+          "PurchasingGroup",
+          "PurchasingOrganization",
+          "PurchasingProcessingStatus",
+          "AddressName",
+          "AddressPhoneNumber"
+        ]
+      },
+      "PurchaseOrderItem": {
+        "iFlowKeys": ["itemNumber"],
+        "searchUrl": "/http/s4hana-onprem/SearchPurchaseOrderItems",
+        "getUrl": "/http/s4hana-onprem/GetPurchaseOrderItem",
+        "searchFields": ["Material"],
+        "updatedFields": ["TaxJurisdiction"],
+
+        "valuehelpUrl": "/http/s4hana-onprem/valuehelp",
+        "valueHelp": {
+          "url": "/MM_PUR_PO_MAINT_V2_SRV",
+          "mapping": [
+            {
+              "field": "TaxCode",
+              "uri": "/C_MM_TaxCodeValueHelp"
+            },
+            {
+              "field": "TaxJurisdiction",
+              "uri": "/C_MM_TaxJurisdictionVH"
+            }
+          ]
+        }
+      }
+    },
+    "Graph": {},
+    "Destination": {
+      "PurchaseOrder": {
+        "destinationName": "tfe-s4hana-onprem-destination",
+        "accessToken": true,
+        "url": "/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder",
+        "actionUrl": "/sap/opu/odata/IWPGW/TASKPROCESSING;mo;v=2/Decision?sap-client=100&SAP__Origin='LOCAL_TGW'",
+        "searchFields": ["PurchaseOrder", "CompanyCode", "Supplier"],
+        "updateFields": [
+          "PurchasingGroup",
+          "PurchasingOrganization",
+          "PurchasingProcessingStatus",
+          "AddressName",
+          "AddressPhoneNumber"
+        ]
+      },
+      "PurchaseOrderItem": {
+        "destinationName": "tfe-s4hana-onprem-destination",
+        "accessToken": true,
+        "url": "/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrderItem",
+        "suffix": "to_PurchaseOrderItem",
+        "searchFields": ["PurchaseOrderItem"],
+        "valueHelp": {
+          "url": "/sap/opu/odata/sap/MM_PUR_PO_MAINT_V2_SRV",
+          "mapping": [
+            {
+              "field": "TaxCode",
+              "uri": "/C_MM_TaxCodeValueHelp?$format=json"
+            },
+            {
+              "field": "TaxJurisdiction",
+              "uri": "/C_MM_TaxJurisdictionVH?$format=json"
+            }
+          ]
+        }
+      },
+      "SalesOrder": {
+        "destinationName": "tfe-s4hana-onprem-destination",
+        "accessToken": true,
+        "url": "/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder",
+        "searchFields": ["SalesOrder"],
+        "updateFields": [
+          "CustomerGroup",
+          "SDDocumentReason",
+          "PurchaseOrderByCustomer"
+        ]
+      },
+      "SalesOrderItem": {
+        "suffix": "to_Item",
+        "searchFields": ["SalesOrderItem"]
+      }
+    }
+  },
+  "SuccessFactors": {
+    "IntegrationSuite": {
+      "User": {
+        "iFlowKeys": ["userId"],
+        "searchUrl": "/http/sfsf/SearchUser",
+        "getUrl": "/http/sfsf/GetUser",
+        "searchFields": ["userId"]
+      }
+    },
+    "Destination": {
+      "userId": {
+        "destinationName": "sfsf-extension",
+        "accessToken": true,
+        "url": "/odata/v2/User",
+        "searchFields": ["userId"]
+      }
+    }
+  },
+  "C4C": {
+    "Destination": {
+      "Ticket": {
+        "destinationName": "c4c-basic-auth",
+        "accessToken": false,
+        "url": "/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection",
+        "valueHelp": {
+          "url": "/sap/c4c/odata/v1/c4codataapi",
+          "mapping": [
+            {
+              "field": "ServiceRequestServicePriorityCodeCollection",
+              "uri": "/ServiceRequestServicePriorityCodeCollection?$format=json"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

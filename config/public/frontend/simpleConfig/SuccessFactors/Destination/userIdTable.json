@@ -1,0 +1,34 @@
+{
+    "title": "SuccessFactors Users",
+    "system": "SuccessFactors",
+    "interface": "Destination",
+    "businessObject": "userId",
+    "pageType": "Table",
+    "components": [
+        {
+            "type": "Table",
+            "system": "SuccessFactors",
+            "interface": "Destination",
+            "businessObject": "userId",
+            "searchable": true,
+            "interactive": true,
+            "columns": [
+                {
+                    "content": "ID",
+                    "key": "userId",
+                    "align": "start"
+                },
+                {
+                    "content": "first",
+                    "key": "firstName",
+                    "align": "start"
+                },
+                {
+                    "content": "last",
+                    "key": "lastName",
+                    "align": "start"
+                }
+            ]
+        }
+    ]
+}

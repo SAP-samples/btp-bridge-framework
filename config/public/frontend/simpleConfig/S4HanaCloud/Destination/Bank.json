@@ -1,0 +1,51 @@
+{
+    "pageType": "Object",
+    "system": "S4HanaCloud",
+    "interface": "Destination",
+    "businessObject": "Bank",
+    "title": "Bank Master Data",
+    "components": [
+      {
+        "type": "PropertyGrid",
+        "properties": [
+          {
+            "content": "Bank Country",
+            "key": "BankCountry"
+          },
+          {
+            "content": "Bank Internal ID",
+            "key": "BankInternalID"
+          },
+          {
+            "content": "Bank Name",
+            "key": "BankName"
+          },
+          {
+            "content": "Region",
+            "key": "Region"
+          },
+          {
+            "content": "Short Street Name",
+            "key": "ShortStreetName"
+          },
+          {
+            "content": "Short City Name",
+            "key": "ShortCityName"
+          },
+          {
+            "content": "SWIFTCode",
+            "key": "SWIFTCode",
+            "inputType": "TextInput"
+          },
+          {
+            "content": "Bank Network Grouping",
+            "key": "BankNetworkGrouping"
+          },
+          {
+            "content": "Is Marked For Deletion",
+            "key": "IsMarkedForDeletion"
+          }
+        ]
+      }
+    ]
+  }
