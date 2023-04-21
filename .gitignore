@@ -5,7 +5,7 @@ node_modules/
 *.log
 env/
 *.xml
-S4HANA\*
+S4HANA/
 btp-azure-trust/
 embed-ui-samples/
 sap-graph/
