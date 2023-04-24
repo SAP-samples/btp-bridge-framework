@@ -94,6 +94,33 @@ Additionally, you can configure and set roles to users in your BTP account now. 
 
 Where the `name` field is the label for your user group and the `members` field is an array of emails to add to that user group. The definition of the user group occurs in the `default.json` file - [see that section](#defaultjson) for more details.
 
+Also, take note of the `"deployToTeams"` field under the `"additionalAutomationConfiguration"` object. This is set to `true` by default (`false` for the free-tier BTP Docker image), which means that the MS Teams App will be sideloaded into Teams as an organizational app during the lifetime of the automated setup. However, this can take a significant amount of time to register in Teams, sometimes up to a day.
+
+You can verify that the deployment to your organization is in progress by running the following script inside of the docker container:
+
+```
+Connect-MicrosoftTeams -UseDeviceAuthentication
+
+$appName = "Bridge Framework"
+$teamsApp = Get-TeamsApp -DisplayName $appName -DistributionMethod organization
+
+Write-Host $teamsApp.DisplayName  // this should print out 'Bridge Framework'
+```
+
+If speed is of importance, disable this feature by setting `"deployToTeams"` to `false`. Then, download the generated `teams-app.zip`, which will be placed under the `/btp-bridge-framework/teams-app-package/` directory in the Docker container, at the end of the automated setup tool. View [this guide](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload) to see how to upload the zip file into teams and activate Bridge. **Note:** this option will be much quicker, but anyone who wishes to use the app will have to follow this process as well!
+
+Lastly, please update the following field in `parameters.json`:
+
+```
+"enterpriseApp": {
+  "emails": []
+}
+```
+
+Replace the empty array with the emails of the users who will need access to Bridge. Alternatively, replace the array with the string `All` to include everyone in the Azure organization. 
+
+**The app will not work if the empty array value is left unchanged!**
+
 ### manifest.yaml
 
 This is the main manifest file for your Cloud Foundry apps. Notice, that each application (frontend, backend, and config) has its own manifest within the Bridge folder (labeled as `btp-bridge-framework/` within the docker container). The individual manifests allow you to re-deploy, and, therefore, update each application individually. They are not pre-configured. The main manifest is and looks like so:
