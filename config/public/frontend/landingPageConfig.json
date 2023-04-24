@@ -1,0 +1,72 @@
+{
+  "id": "landingPageConfig",
+  "path": "/",
+  "solutions": [
+    {
+      "key": 1,
+      "header": "Purchase Orders",
+      "description": "S4HanaCloud IntegrationSuite",
+      "path": "/S4HanaCloud/IntegrationSuite/PurchaseOrderTable"
+    },
+    {
+      "key": 2,
+      "header": "Purchase Orders",
+      "description": "S4HanaCloud Graph",
+      "path": "/S4HanaCloud/Graph/PurchaseOrderTable"
+    },
+    {
+      "key": 3,
+      "header": "Purchase Orders",
+      "description": "S4HanaCloud Destination",
+      "path": "/S4HanaCloud/Destination/PurchaseOrderTable"
+    },
+    {
+      "key": 4,
+      "header": "Purchase Orders",
+      "description": "S4HanaOnPrem IntegrationSuite",
+      "path": "/S4HanaOnPrem/IntegrationSuite/PurchaseOrderTable"
+    },
+    {
+      "key": 5,
+      "header": "Purchase Orders",
+      "description": "S4HanaOnPrem Destination",
+      "path": "/S4HanaOnPrem/Destination/PurchaseOrderTable"
+    },
+    {
+      "key": 6,
+      "header": "Sales Orders",
+      "description": "S4HanaCloud IntegrationSuite",
+      "path": "/S4HanaCloud/IntegrationSuite/SalesOrderTable"
+    },
+    {
+      "key": 7,
+      "header": "Service Orders",
+      "description": "S4HanaCloud Graph",
+      "path": "/S4HanaCloud/Graph/ServiceOrderTable"
+    },
+    {
+      "key": 8,
+      "header": "Users Destination",
+      "description": "SuccessFactors",
+      "path": "/SuccessFactors/Destination/userIdTable"
+    },
+    {
+      "key": 9,
+      "header": "Users",
+      "description": "SuccessFactors",
+      "path": "/SuccessFactors/IntegrationSuite/UserTable"
+    },
+    {
+      "key": 10,
+      "header": "Bank Master Data (S4HanaCloud Destination)",
+      "description": "Find your Bank Master Data here",
+      "path": "S4HanaCloud/Destination/BankTable"
+    },
+    {
+      "key": 11,
+      "header": "Create User",
+      "description": "SuccessFactors",
+      "path": "/SuccessFactors/Destination/userIdForm"
+    }
+  ]
+}

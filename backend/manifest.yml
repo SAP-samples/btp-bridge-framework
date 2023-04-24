@@ -1,0 +1,12 @@
+---
+applications:
+- name: <BACKEND_URL>
+  memory: 256M
+  disk_quota: 256M
+  buildpack: nodejs_buildpack
+  command: npm start
+  services:
+  - <DESTINATION_SERVICE_NAME>
+  - <CONNECTIVITY_SERVICE_NAME>
+  - <XSUAA_SERVICE_NAME>
+  - <APP_LOGGER_SERVICE_NAME>

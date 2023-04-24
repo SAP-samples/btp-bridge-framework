@@ -1,0 +1,133 @@
+{
+  "pageType": "Object",
+  "system": "S4HanaCloud",
+  "interface": "IntegrationSuite",
+  "businessObject": "PurchaseOrder",
+  "CreationDate": "CreationDate",
+  "LastChangeDateTime": "LastChangeDateTime",
+  "BusinessObjectStatus": "PurchasingProcessingStatus",
+  "title": "Purchase Order",
+  "components": [
+    {
+      "type": "Image",
+      "title": "Image",
+      "src": "/frontend/images/meter.png"
+    },
+    {
+      "type": "PropertyGrid",
+      "properties": [
+        {
+          "content": "Purchase Order ID",
+          "key": "PurchaseOrder",
+          "link": {
+            "type": "deep",
+            "url": "SuccessFactors/IntegrationSuite/UserObject?User={AddressName}"
+          }
+        },
+        {
+          "content": "Purchase Order Type",
+          "key": "PurchaseOrderType"
+        },
+        {
+          "content": "Purchasing Processing Status",
+          "key": "PurchasingProcessingStatus"
+        },
+        {
+          "content": "Created By User",
+          "key": "CreatedByUser"
+        },
+        {
+          "content": "Image Content",
+          "type": "Image",
+          "src": "/frontend/images/bridge-logo.png"
+        },
+        {
+          "content": "Creation Date",
+          "key": "CreationDate"
+        },
+        {
+          "content": "Supplier",
+          "key": "Supplier",
+          "link": {
+            "url": "https://api.sap.com/api/CE_SUPPLIERLIST_0001/resource"
+          }
+        },
+        {
+          "content": "Net Payment Days",
+          "key": "NetPaymentDays"
+        },
+        {
+          "content": "Purchasing Group",
+          "key": "PurchasingGroup",
+          "inputType": "TextInput"
+        },
+        {
+          "content": "Address Name",
+          "key": "AddressName",
+          "inputType": "TextArea"
+        },
+        {
+          "content": "Address Phone Number",
+          "key": "AddressPhoneNumber",
+          "inputType": "TextInput"
+        }
+      ]
+    },
+    {
+      "type": "Table",
+      "title": "Purchase Order Items",
+      "interactive": true,
+      "system": "S4HanaCloud",
+      "interface": "IntegrationSuite",
+      "businessObject": "PurchaseOrder/PurchaseOrderItem",
+      "columns": [
+        {
+          "content": "Image Content",
+          "type": "Image",
+          "src": "/frontend/images/item.png",
+          "align": "start"
+        },
+        {
+          "content": "Status",
+          "key": "OverdelivTolrtdLmtRatioInPct"
+        },
+        {
+          "content": "Image Map",
+          "type": "ImageMap",
+          "mappings":[
+            {
+              "status": "0.0",
+              "key":"OverdelivTolrtdLmtRatioInPct",
+              "src":"/frontend/images/rejected.png"
+            },
+            {
+              "status": "10.0",
+              "key":"OverdelivTolrtdLmtRatioInPct",
+              "src":"/frontend/images/approved.png"
+            }
+          ]
+        },
+        {
+          "content": "Item Number",
+          "key": "PurchaseOrderItem",
+          "align": "start"
+        },
+        {
+          "content": "Item Text",
+          "key": "PurchaseOrderItemText",
+          "align": "start"
+        },
+        {
+          "content": "Currency",
+          "key": "DocumentCurrency",
+          "align": "start"
+        },
+        {
+          "content": "Net Price Amount",
+          "key": "NetPriceAmount",
+          "align": "end"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+tunnels:
+  backend:
+    proto: http
+    addr: 8080
+  frontend:
+    proto: http
+    addr: 3007
+  config:
+    proto: http
+    addr: 5500

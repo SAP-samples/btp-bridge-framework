@@ -1,0 +1,27 @@
+{
+  "pageType": "Form",
+  "system": "SuccessFactors",
+  "interface": "Destination",
+  "businessObject": "userId",
+  "title": "Create User",
+  "properties": [
+    {
+      "content": "User ID",
+      "key": "userId",
+      "inputType": "TextInput",
+      "placeholder": "test1"
+    },
+    {
+      "content": "Gender",
+      "key": "gender",
+      "inputType": "TextInput",
+      "placeholder": "M for Male, F for Female"
+    },
+    {
+      "content": "Status",
+      "key": "status",
+      "inputType": "TextInput",
+      "placeholder": "t for true or Active"
+    }
+  ]
+}

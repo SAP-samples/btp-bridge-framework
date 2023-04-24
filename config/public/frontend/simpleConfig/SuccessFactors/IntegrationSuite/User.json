@@ -1,0 +1,56 @@
+{
+    "pageType": "Object",
+    "system": "SuccessFactors",
+    "interface": "IntegrationSuite",
+    "businessObject": "User",
+    "title": "User",
+    "components": [
+        {
+            "type": "PropertyGrid",
+            "properties": [
+                {
+                    "content": "User ID",
+                    "key": "User",
+                    "hidden": true
+                },
+                {
+                    "content": "First",
+                    "key": "firstName"
+                },
+                {
+                    "content": "Last",
+                    "key": "lastName"
+                },
+                {
+                    "content": "Email",
+                    "key": "email"
+                },
+                {
+                    "content": "Hire Date",
+                    "key": "hireDate"
+                },
+                {
+                    "content": "Location",
+                    "key": "location"
+                },
+                {
+                    "content": "Key Position",
+                    "key": "keyPosition"
+                },
+                {
+                    "content": "Image Content",
+                    "type": "Image",
+                    "src": "/frontend/images/profile.png"
+                }
+            ]
+        },
+        {
+            "type": "Button",
+            "content": "View User in SuccessFactors",
+            "action": {
+                "type": "OpenURL",
+                "url": "https://<YOUR_TENANT>.successfactors.com/sf/liveprofile?company=<YOUR_COMPANY_NAME>&selecteduser={User}"
+            }
+        }
+    ]
+}
