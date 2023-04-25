@@ -2,6 +2,8 @@
 
 Users are encouraged to use the automated setup, as it saves times and greatly reduces complexity. That being said, this tool will not be able to setup the entirety of Bridge Framework due to some limitations with the systems Bridge connects to.
 
+Please note that our automated setup tool comes in two flavours: the default image and a btp free tier image. Both images can be found on the release page. For differences between the two versions of Bridge, please refer to [this document](./different-images.md). 
+
 Automated setup will configure your BTP space and subaccount, as well as your resources in Azure. To see what steps you still need to setup by hand, for your use case, please refer to step 3 of [this guide](../manual-setup/manual-setup.md).
 
 ## Prereqs
@@ -12,6 +14,8 @@ Here's a list of what you'll need:
  - Docker Image for Automated Setup (find that on our repo)
  - [Docker Engine](./prereqs/docker-install.md)
  - [VSCode](./prereqs/vscode-install.md) (not required, but strongly recommended)
+
+Additionally, please see [this list](./prereqs/role-collections.md) for role collections needed in your BTP account.
 
 ## Booting Up the Container
 

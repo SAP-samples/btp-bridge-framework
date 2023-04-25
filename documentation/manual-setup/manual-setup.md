@@ -7,4 +7,5 @@ Follow the below steps for manually setting up the Bridge Framework for the firs
 3. Establish trust between BTP and SAP systems
    - [Establish trust between BTP and SAP S/4HANA](./azure-setup/principal-propagation/s4-principal-propagation.md)
    - [Establish trust between BTP and SAP C4C](./azure-setup/principal-propagation/c4c-principal-propagation.md)
+   - [Establish trust between BTP and SAP SuccessFactors](./azure-setup/principal-propagation/sfsf-principal-propagation.md)
 4. [Deploy and register Bridge Framework](./app-deployment/manual-deployment.md)
