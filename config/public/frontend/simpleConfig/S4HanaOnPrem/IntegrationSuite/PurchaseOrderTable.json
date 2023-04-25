@@ -1,0 +1,35 @@
+{
+  "pageType": "Table",
+  "title": "Purchase Orders",
+  "system": "S4HanaOnPrem",
+  "interface": "IntegrationSuite",
+  "businessObject": "PurchaseOrder",
+  "components": [
+    {
+      "type": "Table",
+      "system": "S4HanaOnPrem",
+      "interface": "IntegrationSuite",
+      "businessObject": "PurchaseOrder",
+      "searchable": true,
+      "interactive": true,
+      "columns": [
+        {
+          "content": "PO Number",
+          "key": "PurchaseOrder"
+        },
+        {
+          "content": "Company Code",
+          "key": "CompanyCode"
+        },
+        {
+          "content": "Purchase Order Date",
+          "key": "PurchaseOrderDate"
+        },
+        {
+          "content": "Supplier",
+          "key": "Supplier"
+        }
+      ]
+    }
+  ]
+}
