@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: btp-bridge-framework
-Upstream-Contact: kyungwoo.hyun@sap.com
+Upstream-Contact: paa@sap.com
 Source: <https://github.com/sap-samples/btp-bridge-framework>
 Disclaimer: The code in this project may include calls to APIs ("API Calls") of
  SAP or third-party products or services developed outside of this project

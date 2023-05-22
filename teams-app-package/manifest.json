@@ -68,7 +68,9 @@
             "domains": [
               "*.botframework.com",
               "*.hana.ondemand.com",
-              "*.cfapps.{{CF_REGION}}.hana.ondemand.com"
+              "*.cfapps.us20.hana.ondemand.com",
+              "*.cfapps.us10.hana.ondemand.com",
+              "*.cfapps.eu10.hana.ondemand.com"
             ]
           }
         }
@@ -83,7 +85,9 @@
     "*.githubusercontent.com",
     "*.botframework.com",
     "*.hana.ondemand.com",
-    "*.cfapps.{{CF_REGION}}.hana.ondemand.com"
+    "*.cfapps.us20.hana.ondemand.com",
+    "*.cfapps.us10.hana.ondemand.com",
+    "*.cfapps.eu10.hana.ondemand.com"
   ],
   "webApplicationInfo": {
     "id": "<YOUR_BOT_ID>",

@@ -53,7 +53,7 @@ docker exec -it bridge-automation-pipeline ash
 
 ### parameters.json
 
-This configuration file points the automated tool to your BTP global account, subaccount, and Cloud Foundry space.
+This configuration file points the automated tool to your BTP global account, subaccount, and Cloud Foundry space. **You will have to update this file with your credentials before running the automated setup tool!!!**
 
 You will need to configure the following fields:
 
@@ -113,17 +113,35 @@ Write-Host $teamsApp.DisplayName  // this should print out 'Bridge Framework'
 
 If speed is of importance, disable this feature by setting `"deployToTeams"` to `false`. Then, download the generated `teams-app.zip`, which will be placed under the `/btp-bridge-framework/teams-app-package/` directory in the Docker container, at the end of the automated setup tool. View [this guide](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload) to see how to upload the zip file into teams and activate Bridge. **Note:** this option will be much quicker, but anyone who wishes to use the app will have to follow this process as well!
 
-Lastly, please update the following field in `parameters.json`:
+Also, please update the following field in `parameters.json`:
 
 ```
 "enterpriseApp": {
-  "emails": []
+  "emails": [],
+  "notificationEmail: ""
 }
 ```
 
 Replace the empty array with the emails of the users who will need access to Bridge. Alternatively, replace the array with the string `All` to include everyone in the Azure organization. 
 
 **The app will not work if the empty array value is left unchanged!**
+
+Make sure to update the `notifcationEmail` field to an email you monitor, as this email will receive a notification when the active certificate is near the expiration date.
+
+Lastly, please be sure to update the region of your Resource Group. This is important for Azure resouce provisioning. You can find the this in the `parameters.json` file under `"azureResources"`:
+
+```
+"resourceGroup": {
+  "location": region,
+  "resourceGroupName": "AutomationTestingResourceGroup"
+},
+```
+
+Replace `region` with one of the following valid options:
+
+```
+eastus, eastus2, southcentralus, westus2, westus3, australiaeast, southeastasia, northeurope, swedencentral, uksouth, westeurope, centralus, southafricanorth, centralindia, eastasia, japaneast, koreacentral, canadacentral, francecentral, germanywestcentral, norwayeast, switzerlandnorth, uaenorth, brazilsouth, eastus2euap, qatarcentral, asia, asiapacific, australia, brazil, canada, europe, france, germany, global, india, japan, korea, norway, southafrica, switzerland, unitedstates, northcentralus, westus, centraluseuap, westcentralus, southafricawest, australiacentral, australiacentral2, australiasoutheast, japanwest, koreasouth, southindia, westindia, canadaeast, francesouth, germanynorth, norwaywest, switzerlandwest, ukwest, uaecentral, brazilsoutheast
+```
 
 ### manifest.yaml
 
@@ -203,15 +221,46 @@ Waiting for user authentication to complete (use Ctrl+C to abort)...
 
 To continue, open the link inside the statement `Opening browser for authentication at: https://cpcli.cf.eu10.hana.ondemand.com/login/v2.24.0/browser/<uuid>`. To open the link from the VSCode terminal, click on it while holding down command (control for Windows). This will redirect to a page that will have a button in the middle of the screen with the title `Proceed and log in` or `Yes, log in to SAP BTP`. Click on that to complete authentication.
 
-### Azure Device Codes
+### Terraform
 
-You will be asked for 3-4 Azure device codes, depending on the type of automated setup you run. Nonetheless, each time this occurs, you will see a prompt that will look similar to the following in the terminal:
+Note that in the release pages you may also find a PowerShell automation tool. This may be used if the Terraform tool is causing issues. The difference between the Terraform and PowerShell automation tool is that there are more Azure CLI device code logins to complete (similar to the Az Login section below) and no confirmations for deployment, like Terraform has.
+
+#### Az Login
+
+Terraform needs permission from Azure to provision resources, as a result you will have to login and allow access. 
+
+The following prompt from the terminal will handle permissions:
 
 ```
-WARNING: To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code <device_code> to authenticate.
+ERROR: Please run 'az login' to setup account.
+To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code <device_code> to authenticate.
 ```
 
-All you have to do is copy the `<device_code>` and enter that on the device login page, specified by the link provided (which is https://microsoft.com/devicelogin). You may get re-directed to a user selection page, when navigating to the device login url. Simply select the user account that you are using to setup Bridge. It may ask for your password to confirm you are that user, go ahead and enter it. After all of this, press `Continue` to allow your user access to the API tools that the automated setup will use.
+All you have to do is copy the `<device_code>` and enter that on the device login page, specified by the link provided (which is https://microsoft.com/devicelogin). You may get re-directed to a user selection page, when navigating to the device login url. Simply select the user account that you are using to setup Bridge. It may ask for your password to confirm you are that user, go ahead and enter it. After all of this, press `Continue` to allow your terraform access to the API tools that the automated setup will use.
+
+#### Confirmation Deployment
+
+```
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: 
+```
+
+Type in `yes` and press enter to confirm the resource deployment.
+
+#### Remove Deployment
+
+Occasionally, terraform will provision all Azure resources without error, but some issues will still occur in Azure. The Azure Bot Service will seldom have issues with its chat channels, even on success. When this happens, simply remove the resources provisioned by terraform and re-run the pipeline.
+
+To remove resources in Azure, run the removal script `bash /home/user/iac-azure-modular/remove_azure_resources.sh`. Enter `yes` when prompted about resource removal.
+
+To re-run the pipeline, call `./btpsa` again.
+
+### Deploy To Teams
+
+If you have `deployToTeams` set to `true` in your `parameters.json` file, then you will be prompted with a Azure login device code again. Follow the same steps that were taken to login to Azure for terraform authorization.
 
 ### Cloud Foundry Authentication
 

@@ -382,6 +382,7 @@ const ObjectPage = (props) => {
   const componentList = [];
 
   props.config.components.forEach((component) => {
+
     switch (component.type) {
       case "PropertyGrid":
         componentList.push(

@@ -344,6 +344,7 @@ const Table = (props) => {
           }
         />
       )}
+
       {/**
        * The loading behavior is different on object pages vs on table pages.
        * On a table page the loader will occupy the entire task module, whereas on

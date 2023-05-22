@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: <CONFIG_URL>
+  - name: ms-teams-us10-config
     memory: 64M
     disk_quota: 64M
     path: .

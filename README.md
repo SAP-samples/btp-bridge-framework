@@ -1,16 +1,14 @@
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-bridge-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-bridge-framework)
+# Bridge Framework – SAP BTP Framework for MS Teams Integrations with SAP
 
-# Bridge Framework for SAP S/4HANA and Microsoft Teams
+![Bridge Framework Image](./documentation/images/bridge-framework-main.png)
 
-![Bridge Framework Image](./documentation/bridge-framework-main.png)
+## What is the Bridge Framework?
 
-## Description
-The Bridge Framework is an integration framework deployed on SAP BTP that allows developers to quickly customize and deploy apps that bring the powerful business logic of SAP products to the convenience of Microsoft Teams.
-
-The Bridge Framework supports integrating with SAP systems through BTP services that developers may already be familiar with: SAP Integration Suite, SAP Graph, and destination service. Simple object mapping configurations within the framework provide developers with the ability to access business objects through any of the supported services. The framework does not enforce limits on which services to use for which use case, so developers are free to decide which API works best for them based on their business needs. Furthermore, the Bridge Framework provides an out-of-the-box UI that is intuitive and easy to configure, all while adhering to the design and styling of Microsoft Teams.
+The Bridge Framework is an integration framework on SAP BTP that **accelerates and simplifies the development experience** for Teams apps that integrate with SAP products.
 
 ## Benefits of Bridge Framework
-- **Leverage SAP BTP**: Ensure consistency across integrations and leverage the robout integration capabilities of SAP BTP services without a steep learning curve.
+
+- **Leverage SAP BTP**: Ensure consistency across integrations and leverage the robust integration capabilities of SAP BTP services without a steep learning curve.
 - **Ready to Deploy**: Comes packaged with business content and step-by-step guides to drive accelerated deployments.
 - **Curated UI Components**: Take advantage of pre-built UI components that integrate seamlessly with Teams.
   Easily use Adaptive Cards, Task Modules, and Notifications.
@@ -44,16 +42,5 @@ Optional:
 | Table styling improvements | Tables are now scrollable, can display images, and include more options for changing the styling of rows       |
 | Transcript summarization   | Automatic transcript summarization for scheduled meetings can be enabled                                       |
 
-## Known Issues
-No known issues.
-
-## How to obtain support
-[Create an issue](https://github.com/SAP-samples/btp-bridge-framework/issues) in this repository if you find a bug or have questions about the content.
- 
-For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
-
-## Contributing
-If you wish to contribute code, offer fixes or improvements, please send a pull request. Due to legal reasons, contributors will be asked to accept a DCO when they create the first pull request to this project. This happens in an automated fashion during the submission process. SAP uses [the standard DCO text of the Linux Foundation](https://developercertificate.org/).
-
 ## License
-Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the SAP Sample Code License Agreement v1.0 except as noted otherwise in the [LICENSE](LICENSE) file.
+Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the SAP Sample Code License Agreement v1.0 except as noted otherwise in the [LICENSE](LICENSE) file.
