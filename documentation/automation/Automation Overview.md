@@ -31,6 +31,14 @@ To then build and run the container, use the following command:
 docker container run -e BTPSA_VERSION_GIT="\$(git describe --long --tags  --always)" --rm  -it -d --name bridge-automation-pipeline bridge-automation-pipeline
 ```
 
+If the above command errors, specifically about the `--rm` flag, manually delete the existing Bridge container (if one has already been built) and then re-run the command without the `--rm` flag:
+
+```
+docker container run -e BTPSA_VERSION_GIT="\$(git describe --long --tags  --always)" --rm  -it -d --name bridge-automation-pipeline bridge-automation-pipeline
+```
+
+*For those unfamiliar with terminals, you will need to open a terminal at the download location of the packaged docker container. After opening the terminal application on your computer, enter the following command: `cd Downloads/` and then run the commands above.
+
 ### Connect with VSCode
 
 You can then connect to the container via VSCode and the Dev Containers extension. To do so, open the command palette (Windows: Ctrl+Shift+P; Mac: Cmd+Shift+P) and select the `Remote Containers: Attach to Running Container...` command. Attach to the container by name, in this case it should be `bridge-automation-pipeline`. This option might only work after using Docker or installing and connecting to this Docker container.
@@ -142,6 +150,25 @@ Replace `region` with one of the following valid options:
 ```
 eastus, eastus2, southcentralus, westus2, westus3, australiaeast, southeastasia, northeurope, swedencentral, uksouth, westeurope, centralus, southafricanorth, centralindia, eastasia, japaneast, koreacentral, canadacentral, francecentral, germanywestcentral, norwayeast, switzerlandnorth, uaenorth, brazilsouth, eastus2euap, qatarcentral, asia, asiapacific, australia, brazil, canada, europe, france, germany, global, india, japan, korea, norway, southafrica, switzerland, unitedstates, northcentralus, westus, centraluseuap, westcentralus, southafricawest, australiacentral, australiacentral2, australiasoutheast, japanwest, koreasouth, southindia, westindia, canadaeast, francesouth, germanynorth, norwaywest, switzerlandwest, ukwest, uaecentral, brazilsoutheast
 ```
+
+### parameters.json extended
+
+**Note, users will likely need to change the value of their application names!** Application names are used to define the url route of the applications, and routes must be unique. So, it is recommended to make app names unique, otherwise duplication and conflict errors will occur.
+
+Refer to the following to see what fields must be updated to avoid any issues:
+
+```
+"additionalAutomationConfiguration": {
+  "appNames": {
+    "backend": "bridge-framework-backend",
+    "config": "bridge-framework-config",
+    "frontend": "bridge-framework-frontend"
+  },
+  ...
+}
+```
+
+It is recommended to add a prefix or suffix to each of the `backend`, `config`, and `frontend` app names. **These changes must be propagated to the main manifest (and sub-manifest files) - see below!**
 
 ### manifest.yaml
 
@@ -258,9 +285,15 @@ To remove resources in Azure, run the removal script `bash /home/user/iac-azure-
 
 To re-run the pipeline, call `./btpsa` again.
 
+**Note:** Azure occasionally has issues with ghost deletes (confirming deletion of resources, but resources still exist). If this is the case please see [this issue](https://github.com/SAP-samples/btp-bridge-framework/issues/21), which details how to fix this problem.
+
 ### Deploy To Teams
 
 If you have `deployToTeams` set to `true` in your `parameters.json` file, then you will be prompted with a Azure login device code again. Follow the same steps that were taken to login to Azure for terraform authorization.
+
+If this is set to `false`, please see [this guide](../manual-setup/app-deployment/ms-app-deployment.md) for deploying your app to MS Teams.
+
+**Note:** some versions of Firefox do not support the web client version of MS Teams.
 
 ### Cloud Foundry Authentication
 

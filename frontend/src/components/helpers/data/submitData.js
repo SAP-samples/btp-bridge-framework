@@ -1,4 +1,5 @@
 export const submitData = async (url, body, authToken) => {
+  console.log("req body in submit", body);
   const headers = { "Content-Type": "application/json" };
   if (authToken) {
     headers.teams_auth_token = authToken;

@@ -1,0 +1,64 @@
+{
+  "pageType": "Object",
+  "system": "C4C",
+  "interface": "Destination",
+  "businessObject": "ServiceRequestCollection",
+  "title": "Ticket",
+  "components": [
+    {
+      "type": "PropertyGrid",
+      "properties": [
+        {
+          "content": "Ticket ID",
+          "key": "ID"
+        },
+        {
+          "content": "Created By",
+          "key": "CreatedBy"
+        },
+        {
+          "content": "Creation Date",
+          "key": "CreationDate"
+        },
+        {
+          "content": "Customer",
+          "key": "Customer"
+        },
+        {
+          "content": "Service Technician",
+          "key": "ServiceTechnician"
+        },
+        {
+          "content": "Escalation",
+          "key": "EscalationStatusText"
+        },
+        {
+          "content": "Contact Person",
+          "key": "Contact"
+        }
+      ]
+    },
+    {
+      "type": "Table",
+      "title": "Ticket Items",
+      "interactive": false,
+      "system": "C4C",
+      "interface": "Destination",
+      "businessObject": "ServiceRequestCollection/ServiceRequestItem",
+      "columns": [
+        {
+          "content": "Product ID",
+          "key": "ProductID"
+        },
+        {
+          "content": "Product Description",
+          "key": "ProductDescription"
+        },
+        {
+          "content": "Product Category",
+          "key": "ProductCategoryDescription"
+        }
+      ]
+    }
+  ]
+}

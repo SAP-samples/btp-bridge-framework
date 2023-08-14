@@ -1,13 +1,13 @@
 {
-  "BusinessObjectName": "PO",
+  "BusinessObject": "PurchaseOrder",
   "fields": {
     "ReceiverEmailList": "USER_EMAIL",
     "ObjectId": "PO_ID",
     "ActionId": "TASK_ID",
     "Description": "DESCRIPTION",
     "CreatedBy": "CREATED_BY",
-    "Others": { "Creation Date": "CREATED_ON", "Priority": "PRIORITY" }
+    "Others": { "CreationDate": "CREATED_ON", "Priority": "PRIORITY" }
   },
   "DetailScreenConfig": "/frontend/simpleConfig/S4HanaOnPrem/Destination/PurchaseOrder.json",
-  "origSysManagementAppURL": "https://3.224.195.53:44300/sap/bc/ui2/flp#PurchaseOrder-manage&/C_PurchaseOrderTP(PurchaseOrder='objectId',DraftUUID=guid'00000000-0000-0000-0000-000000000000',IsActiveEntity=true)"
+  "origSysManagementAppURL": "https://<S/4HANA-External_IP:Port>/sap/bc/ui2/flp#PurchaseOrder-manage&/C_PurchaseOrderTP(PurchaseOrder='{PO_ID}',DraftUUID=guid'00000000-0000-0000-0000-000000000000',IsActiveEntity=true)"
 }

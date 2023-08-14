@@ -97,7 +97,7 @@
     },
     "Destination": {
       "PurchaseOrder": {
-        "destinationName": "s4hana-cloud-basic-auth",
+        "destinationName": "<SAP-S4HANA-CLOUD-DESTINATION-NAME>",
         "accessToken": false,
         "url": "/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder",
         "searchFields": ["PurchaseOrder", "CompanyCode", "Supplier"],
@@ -110,7 +110,7 @@
         ]
       },
       "PurchaseOrderItem": {
-        "destinationName": "s4hana-cloud-basic-auth",
+        "destinationName": "<SAP-S4HANA-CLOUD-DESTINATION-NAME>",
         "accessToken": false,
         "url": "/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrderItem",
         "suffix": "to_PurchaseOrderItem",
@@ -130,7 +130,7 @@
         }
       },
       "SalesOrder": {
-        "destinationName": "s4hana-cloud-basic-auth",
+        "destinationName": "<SAP-S4HANA-CLOUD-DESTINATION-NAME>",
         "accessToken": false,
         "url": "/API_SALES_ORDER_SRV/A_SalesOrder",
         "searchFields": ["SalesOrder"],
@@ -145,7 +145,7 @@
         "searchFields": ["SalesOrderItem"]
       },
       "Bank": {
-        "destinationName": "s4hana-cloud-basic-auth",
+        "destinationName": "<SAP-S4HANA-CLOUD-DESTINATION-NAME>",
         "accessToken": false,
         "url": "/api_bank/srvd_a2x/sap/bank/0002/Bank",
         "pathParams": ["BankCountry", "BankInternalID"],
@@ -198,7 +198,7 @@
     "Graph": {},
     "Destination": {
       "PurchaseOrder": {
-        "destinationName": "tfe-s4hana-onprem-destination",
+        "destinationName": "<SAP-S4HANA-ONPREM-DESTINATION-NAME>",
         "accessToken": true,
         "url": "/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrder",
         "actionUrl": "/sap/opu/odata/IWPGW/TASKPROCESSING;mo;v=2/Decision?sap-client=100&SAP__Origin='LOCAL_TGW'",
@@ -212,7 +212,7 @@
         ]
       },
       "PurchaseOrderItem": {
-        "destinationName": "tfe-s4hana-onprem-destination",
+        "destinationName": "<SAP-S4HANA-ONPREM-DESTINATION-NAME>",
         "accessToken": true,
         "url": "/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV/A_PurchaseOrderItem",
         "suffix": "to_PurchaseOrderItem",
@@ -232,7 +232,7 @@
         }
       },
       "SalesOrder": {
-        "destinationName": "tfe-s4hana-onprem-destination",
+        "destinationName": "<SAP-S4HANA-ONPREM-DESTINATION-NAME>",
         "accessToken": true,
         "url": "/sap/opu/odata/sap/API_SALES_ORDER_SRV/A_SalesOrder",
         "searchFields": ["SalesOrder"],
@@ -259,7 +259,7 @@
     },
     "Destination": {
       "userId": {
-        "destinationName": "sfsf-extension",
+        "destinationName": "<SFSF-DESTINATION-NAME>",
         "accessToken": true,
         "url": "/odata/v2/User",
         "searchFields": ["userId"]
@@ -269,7 +269,7 @@
   "C4C": {
     "Destination": {
       "Ticket": {
-        "destinationName": "c4c-basic-auth",
+        "destinationName": "<C4C-DESTINATION-NAME>",
         "accessToken": false,
         "url": "/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection",
         "valueHelp": {

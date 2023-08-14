@@ -8,7 +8,7 @@ import {
 } from "@fluentui/react-northstar";
 import Header from "./Header";
 import Loader from "./Loader";
-import { useEffect, useRef, useState, useCallback} from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import * as helper from "./helpers";
 import ObjectPropertyGrid from "./objectPageComponents/ObjectPropertyGrid";
@@ -52,13 +52,12 @@ const ObjectPage = (props) => {
   const [status, setStatus] = useState("");
   const [creationDate, setCreationDate] = useState("");
   const dropdownProps = {
-
     pageObject: props.config.businessObject,
     backendUrl: props.backendUrl,
     systemName: props.config.system,
     interfaceName: props.config.interface,
-    authToken: props.authToken
-  }
+    authToken: props.authToken,
+  };
 
   const paramPathArray = [];
   props.config.businessObject.split("/").forEach((obj) => {
@@ -69,9 +68,12 @@ const ObjectPage = (props) => {
   });
 
   const reqQuery = {};
-  if(location.state){
-    if(location.state.hasOwnProperty("kvPairs") && location.state.kvPairs !== null){
-      for(let i = 0; i < location.state.kvPairs.length; i++){
+  if (location.state) {
+    if (
+      location.state.hasOwnProperty("kvPairs") &&
+      location.state.kvPairs !== null
+    ) {
+      for (let i = 0; i < location.state.kvPairs.length; i++) {
         const kvPair = location.state.kvPairs[i];
         reqQuery[kvPair[0]] = kvPair[1];
       }
@@ -86,7 +88,6 @@ const ObjectPage = (props) => {
     props.config.interface +
     "/" +
     paramPathArray.join("/");
-  
 
   const updatePropertyListWithValues = useCallback(() => {
     const propertyGridComponent = props.config.components.find(
@@ -100,7 +101,10 @@ const ObjectPage = (props) => {
         .then((data) => {
           const propertyListCopy = JSON.parse(JSON.stringify(properties));
           propertyListCopy.forEach((property) => {
-            if(property.hasOwnProperty("inputType") && property.inputType !== ""){
+            if (
+              property.hasOwnProperty("inputType") &&
+              property.inputType !== ""
+            ) {
               editable.current = true;
             }
             if (data.hasOwnProperty(property.key)) {
@@ -115,7 +119,7 @@ const ObjectPage = (props) => {
             }
 
             // Setting creation date
-            if (data.hasOwnProperty(data[props.config.CreationDate])) {
+            if (data.hasOwnProperty(props.config.CreationDate)) {
               const date = helper.formatDate(
                 JSON.parse(JSON.stringify(data[props.config.CreationDate]))
               );
@@ -123,7 +127,7 @@ const ObjectPage = (props) => {
             }
 
             // Date on which order was last changed, including status changes
-            if (data.hasOwnProperty(data[props.config.LastChangeDateTime])) {
+            if (data.hasOwnProperty(props.config.LastChangeDateTime)) {
               const date = helper.formatDate(
                 JSON.stringify(data[props.config.LastChangeDateTime])
               );
@@ -131,7 +135,7 @@ const ObjectPage = (props) => {
             }
 
             // Status whether order is approved, rejected, or pending
-            if (data.hasOwnProperty(data[props.config.PurchasingProcessingStatus])) {
+            if (data.hasOwnProperty(props.config.PurchasingProcessingStatus)) {
               setStatus(data[props.config.PurchasingProcessingStatus]);
             }
           });
@@ -216,23 +220,52 @@ const ObjectPage = (props) => {
     }
   };
 
-  const handleExportClick = (e) => {
+  const handleExportClick = (e, integrationType, targetSpace) => {
     e.preventDefault();
-    const objData = {};
+    console.log("Inside export click", integrationType);
+    let objData = {};
     propertyList.forEach((property) => {
       objData[property.content] = property.value;
     });
-    microsoftTeams.tasks.submitTask({
-      title: `${props.config.title} ${objectID}`,
-      objData: objData,
-      url: window.location.href,
-    });
+
+    console.log(objData);
+    switch (integrationType) {
+      case "ms365": {
+        microsoftTeams.tasks.submitTask({
+          title: `${props.config.title} ${objectID}`,
+          objData: objData,
+          url: window.location.href,
+        });
+
+        break;
+      }
+
+      case "google": {
+        // Call google endpoint
+        const url =
+          props.backendUrl.replace("/gateway", "") + "/googleChat/exportObject";
+        objData["targetSpace"] = targetSpace;
+        objData[
+          "pageUrl"
+        ] = `${window.location.href}&targetSpace=${targetSpace}`;
+
+        helper.submitData(url, objData, null).then((response) => {
+          console.log("Response from backend", response);
+        });
+      }
+    }
+
+    // if (integrationType && integrationType === "ms365") {
+
+    // } else if(){
+    //   console.log("Helloooooooo");
+    // }
   };
 
   // Function For DropDown
   const handleSelectChange = (selectValue, propertyKey) => {
     editedValues.current[propertyKey] = selectValue;
-  }
+  };
 
   // need to generalize query params
   const [workflowType, setWorkflowType] = useState("");
@@ -382,7 +415,6 @@ const ObjectPage = (props) => {
   const componentList = [];
 
   props.config.components.forEach((component) => {
-
     switch (component.type) {
       case "PropertyGrid":
         componentList.push(
@@ -421,9 +453,7 @@ const ObjectPage = (props) => {
         break;
       case "Image":
         componentList.push(
-          <Image 
-            title={component.title}
-            src={component.src}/>
+          <Image title={component.title} src={component.src} />
         );
         break;
       default:
@@ -467,6 +497,7 @@ const ObjectPage = (props) => {
             handleSaveClick={handleSaveClick}
             handleCancelClick={handleCancelClick}
             handleExportClick={handleExportClick}
+            integrationType={props.integrationType}
           />
         );
     }
@@ -475,7 +506,7 @@ const ObjectPage = (props) => {
   return (
     <Flex column styles={{ minHeight: "100vh" }}>
       <Header title={`${props.config.title} ${objectID}`} ref={ref} />
-      {(
+      {
         <>
           {loading ? (
             <Loader headerHeight={marginHeight} />
@@ -490,7 +521,7 @@ const ObjectPage = (props) => {
             </>
           )}
         </>
-      )}
+      }
     </Flex>
   );
 };

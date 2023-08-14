@@ -18,6 +18,7 @@ class ResponseFormatter {
     let successMessage = {};
     successMessage.data = response.data;
     successMessage.status = response.status;
+    console.log("Success message is: ", successMessage);
     return successMessage;
   }
 
@@ -155,10 +156,10 @@ class ResponseFormatter {
 
   toParams(query, searchFields, switchSubstringofParams = false) {
     let params;
-    if(query.hasOwnProperty("top") && query.top !== ""){
+    if (query.hasOwnProperty("top") && query.top !== "") {
       params = "$format=json&$top=" + query.top;
-    }else{
-      params = "$format=json&$top=" + process.env.SCROLL_MAX_PAGE_SIZE;
+    } else {
+      params = "$format=json&$top=10";
     }
 
     if (searchFields && query["filter"]) {
@@ -177,6 +178,7 @@ class ResponseFormatter {
       params += "&$filter=" + filters.join(" or ");
     }
 
+    console.log("params for object items are", params);
     return params;
   }
 }

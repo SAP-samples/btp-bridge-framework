@@ -1,0 +1,46 @@
+{
+  "title": "Service Tickets",
+  "system": "C4C",
+  "interface": "Destination",
+  "businessObject": "ServiceRequestCollection",
+  "pageType": "Table",
+  "components": [
+    {
+      "type": "Table",
+      "system": "C4C",
+      "interface": "Destination",
+      "businessObject": "ServiceRequestCollection",
+      "keys": ["ObjectID"],
+      "searchable": true,
+      "interactive": true,
+      "maxItems": 10,
+      "columns": [
+        {
+          "content": "ObjectID",
+          "key": "ObjectID",
+          "align": "start"
+        },
+        {
+          "content": "ID",
+          "key": "ID",
+          "align": "start"
+        },
+        {
+          "content": "Customer",
+          "key": "Customer",
+          "align": "start"
+        },
+        {
+          "content": "Completion Due Date",
+          "key": "CompletionDueDate",
+          "align": "start"
+        },
+        {
+          "content": "Priority",
+          "key": "ServicePriorityCodeText",
+          "align": "start"
+        }
+      ]
+    }
+  ]
+}

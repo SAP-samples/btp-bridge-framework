@@ -1,18 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App";
+import AppSwitcher from "./AppSwitcher";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { BrowserRouter } from "react-router-dom";
+import { TargetSpaceProvider } from "./components/helpers";
 
 // Initialize the Microsoft Teams SDK
 microsoftTeams.initialize();
 
 ReactDOM.render(
   <BrowserRouter>
-      <App
-        configUrl={process.env.REACT_APP_CONFIG_URL}
-        backendUrl={process.env.REACT_APP_BACKEND_URL}
-      />
+    <TargetSpaceProvider>
+      <AppSwitcher integrationType={process.env.REACT_APP_INTEGRATION_TYPE} />
+    </TargetSpaceProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );

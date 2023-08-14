@@ -1,5 +1,5 @@
 const axios = require("axios");
-const OnPremIntegrationSuiteAuthRouter = require("../router/S4HanaOnPrem/OnPremIntegrationSuiteAuthRouter");
+// const OnPremIntegrationSuiteAuthRouter = require("../router/S4HanaOnPrem/OnPremIntegrationSuiteAuthRouter");
 
 class IntegrationSuite {
   constructIFlowKeysCollection(interfaceMapping, paramPathArray) {
@@ -35,7 +35,7 @@ class IntegrationSuite {
         paramPathArray
       );
       const jsonBody = {
-        top: query.top ? query.top : process.env.SCROLL_MAX_PAGE_SIZE
+        top: query.top ? query.top : process.env.SCROLL_MAX_PAGE_SIZE,
       };
       // step 2: construct the filter if applicable
       if (objectMapping.searchFields) {
@@ -85,7 +85,13 @@ class IntegrationSuite {
         });
     });
   }
-  getObject(paramPathArray, query, interfaceMapping, commonConfig, btpAccessToken) {
+  getObject(
+    paramPathArray,
+    query,
+    interfaceMapping,
+    commonConfig,
+    btpAccessToken
+  ) {
     return new Promise((resolve, reject) => {
       //step 1: get the iFlow Keys and objectMapping
       let businessObject = paramPathArray[paramPathArray.length - 2];
@@ -107,7 +113,10 @@ class IntegrationSuite {
       //add all iFlowKey-value pairs to the json body
       let jsonBody = {};
       if (query && Object.keys(query).length > 0) {
-        if (objectMapping.hasOwnProperty("pathParams") && objectMapping.pathParams.length > 0) {
+        if (
+          objectMapping.hasOwnProperty("pathParams") &&
+          objectMapping.pathParams.length > 0
+        ) {
           Object.keys(query).forEach((key) => {
             if (objectMapping.pathParams.includes(key)) {
               jsonBody[key] = query[key];
@@ -139,7 +148,14 @@ class IntegrationSuite {
     });
   }
 
-  updateObject(paramPathArray, query, interfaceMapping, commonConfig, response, body) {
+  updateObject(
+    paramPathArray,
+    query,
+    interfaceMapping,
+    commonConfig,
+    response,
+    body
+  ) {
     return new Promise((resolve, reject) => {
       let businessObject = paramPathArray[paramPathArray.length - 2];
       let objectMapping = interfaceMapping[businessObject];
@@ -164,7 +180,10 @@ class IntegrationSuite {
 
       //add all iFlowKey-value pairs to the json body
       if (query && Object.keys(query).length > 0) {
-        if (objectMapping.hasOwnProperty("pathParams") && objectMapping.pathParams.length > 0) {
+        if (
+          objectMapping.hasOwnProperty("pathParams") &&
+          objectMapping.pathParams.length > 0
+        ) {
           Object.keys(query).forEach((key) => {
             if (objectMapping.pathParams.includes(key)) {
               jsonBody[key] = query[key];
@@ -206,39 +225,44 @@ class IntegrationSuite {
   }
 
   getValueHelpValues(parentObject, query, interfaceMapping, commonConfig) {
-
     return new Promise((resolve, reject) => {
-
       let reqBody;
       const selectPropertyName = query.select;
       let parentObjectConfigMapping = interfaceMapping[parentObject];
       let vhISuiteArtifactUrl = parentObjectConfigMapping.valuehelpUrl;
       let vhServiceCommonPath = parentObjectConfigMapping.valueHelp.url;
 
-      if (vhServiceCommonPath.includes("/") && vhServiceCommonPath.indexOf("/") === 0) {
+      if (
+        vhServiceCommonPath.includes("/") &&
+        vhServiceCommonPath.indexOf("/") === 0
+      ) {
         vhServiceCommonPath = vhServiceCommonPath.substr(1);
       }
 
-      parentObjectConfigMapping.valueHelp.mapping.forEach(map => {
+      parentObjectConfigMapping.valueHelp.mapping.forEach((map) => {
         if (map.field.toString() == selectPropertyName.toString()) {
           reqBody = {
             commonPath: vhServiceCommonPath,
-            specificPath: map.uri.includes("/") && map.uri.indexOf("/") == 0 ? map.uri.substr(1) : map.uri
-          }
+            specificPath:
+              map.uri.includes("/") && map.uri.indexOf("/") == 0
+                ? map.uri.substr(1)
+                : map.uri,
+          };
         }
       });
 
-      axios.post(
-        commonConfig.iFlowUrl + vhISuiteArtifactUrl,
-        reqBody,
-        commonConfig.httpConfig
-      )
+      axios
+        .post(
+          commonConfig.iFlowUrl + vhISuiteArtifactUrl,
+          reqBody,
+          commonConfig.httpConfig
+        )
         .then((response) => {
           resolve(response);
         })
         .catch((error) => {
           reject(error);
-        })
+        });
     });
   }
 }

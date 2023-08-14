@@ -1,18 +1,21 @@
 export const getData = async (reqUrl, authToken, reqQuery) => {
-  const headers = { "Content-Type": "application/json" };
+  let headers = {
+    "Content-Type": "application/json",
+    integration_type: process.env.REACT_APP_INTEGRATION_TYPE,
+  };
   if (authToken) {
     headers.teams_auth_token = authToken;
   }
 
   const requestOptions = {
     method: "GET",
-    headers: headers
+    headers: headers,
   };
 
   let url = new URL(reqUrl);
-  if(reqQuery){
+  if (reqQuery) {
     Object.keys(reqQuery).forEach((key) => {
-      url.searchParams.append(key, reqQuery[key])
+      url.searchParams.append(key, reqQuery[key]);
     });
   }
 

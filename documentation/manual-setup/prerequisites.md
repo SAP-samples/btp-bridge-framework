@@ -93,5 +93,8 @@ Note: If you are using an existing Azure subscription, please verify if you have
 
 Download and install [Visual Studio Code](https://code.visualstudio.com/download) (recommended) depending upon your operating system.
 
+&nbsp;
+
 ## Next Steps
+
 Follow the [automated setup guide](../automation/Automation%20Overview.md).

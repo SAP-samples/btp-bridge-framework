@@ -46,17 +46,21 @@ app.use("/gateway", SystemRouter);
 const NotificationRouter = require("./router/NotificationRouter");
 app.use("/notify", NotificationRouter);
 
-// MS Bot
+// MS Teams Bot
 const path = require("path");
 const ENV_FILE = path.join(__dirname, ".env");
 require("dotenv").config({ path: ENV_FILE });
-const botActivityHandler = require("./bots/botActivityHandler");
-const botAdapter = require("./bots/botAdapter");
+const botActivityHandler = require("./bots/MS365/botActivityHandler");
+const botAdapter = require("./bots/MS365/botAdapter");
 app.post("/api/messages", (req, res) => {
   botAdapter.processActivity(req, res, async (context) => {
     await botActivityHandler.run(context);
   });
 });
+
+// Google Chat Bot
+const GoogleChatBotHandler = require("./bots/GoogleWS/GoogleChatBotHandler");
+app.use("/googleChat", GoogleChatBotHandler);
 
 // Server port
 app.listen(port, () => {

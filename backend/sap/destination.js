@@ -1,6 +1,7 @@
 const core = require("@sap-cloud-sdk/core");
 const ResponseFormatter = require("../helpers/responseFormatter");
 const UrlHelper = require("../helpers/urlHelper");
+const fs = require("fs");
 
 class Destination {
   searchObject(
@@ -32,13 +33,13 @@ class Destination {
         })
         .then((response) => {
           logger.info(
-            "Data received from searchobject in destination.js",
+            "Response from destination in searchObject ",
             response.data.d.results
           );
           resolve(response.data.d.results);
         })
         .catch((error) => {
-          logger.error("searchObject error in destination.js", error);
+          logger.error("Error from destination in searchObject ", error);
           reject(error);
         });
     });
@@ -83,10 +84,22 @@ class Destination {
   }
 
   getObject(businessObject, id, interfaceMapping, query, accessToken, logger) {
+    console.log(
+      "Inside destination getObject",
+      businessObject,
+      id,
+      interfaceMapping,
+      query,
+      accessToken
+    );
     return new Promise((resolve, reject) => {
       const objectMapping = interfaceMapping[businessObject];
 
-      const url = UrlHelper.generateFirstLevelRequestUrl(objectMapping, id, query);
+      const url = UrlHelper.generateFirstLevelRequestUrl(
+        objectMapping,
+        id,
+        query
+      );
 
       const destination = { destinationName: objectMapping.destinationName };
       if (objectMapping.accessToken) {
@@ -97,10 +110,15 @@ class Destination {
         .executeHttpRequest(destination, { method: "GET", url: url })
         .then((response) => {
           logger.info("data received in destination getObject");
+          console.log(
+            "Data received in destination get object",
+            response.data.d
+          );
           resolve(response.data.d);
         })
         .catch((error) => {
           logger.error("error in destination getObject", error);
+          console.log("error in destination getObject", error);
           reject(error);
         });
     });
@@ -119,8 +137,14 @@ class Destination {
       const objectMapping = interfaceMapping[businessObject];
       const objectItemMapping = interfaceMapping[businessObjectItem];
 
-      const url = UrlHelper.generateSecondLevelRequestUrl(businessObject, id, businessObjectItem,
-        itemId, objectItemMapping, query);
+      const url = UrlHelper.generateSecondLevelRequestUrl(
+        businessObject,
+        id,
+        businessObjectItem,
+        itemId,
+        objectItemMapping,
+        query
+      );
       const destination = { destinationName: objectMapping.destinationName };
       if (objectMapping.accessToken) {
         destination["jwt"] = accessToken;
@@ -144,9 +168,12 @@ class Destination {
 
   updateObject(businessObject, id, interfaceMapping, body, query, accessToken) {
     return new Promise((resolve, reject) => {
-
       const objectMapping = interfaceMapping[businessObject];
-      const url = UrlHelper.generateFirstLevelRequestUrl(objectMapping, id, query);
+      const url = UrlHelper.generateFirstLevelRequestUrl(
+        objectMapping,
+        id,
+        query
+      );
       const destination = { destinationName: objectMapping.destinationName };
       if (objectMapping.accessToken) {
         destination["jwt"] = accessToken;
@@ -176,13 +203,24 @@ class Destination {
     accessToken,
     isReview
   ) {
+    console.log(
+      "Inside submitdata",
+      businessObject,
+      id,
+      interfaceMapping,
+      body,
+      accessToken,
+      isReview
+    );
     const objectMapping = interfaceMapping[businessObject];
 
     let payload = {};
     let url = "";
     if (isReview) {
       // construct taskprocessing url here
+      console.log("it is review");
       if (body.hasOwnProperty("workFlowId")) {
+        console.log("body has id");
         url = `${objectMapping.actionUrl}&InstanceID='${body.workFlowId}'&DecisionKey='${body.decisionKey}'`;
       } else {
         console.log("Request is non-workflowType\n");
@@ -192,7 +230,7 @@ class Destination {
       payload = { ...body };
       url = `${objectMapping.url}('${id}')`;
     }
-
+    console.log("Url in submitdata", url);
     return new Promise((resolve, reject) => {
       const destination = { destinationName: objectMapping.destinationName };
       if (objectMapping.accessToken) {
@@ -265,7 +303,14 @@ class Destination {
     return new Promise((resolve, reject) => {
       const parentObjectMapping = interfaceMapping[parentObject];
       const subObjectMapping = interfaceMapping[subObject];
-      const url = UrlHelper.generateSecondLevelRequestUrl(parentObject, pId, subObject, sId, subObjectMapping, query);
+      const url = UrlHelper.generateSecondLevelRequestUrl(
+        parentObject,
+        pId,
+        subObject,
+        sId,
+        subObjectMapping,
+        query
+      );
 
       const destination = {
         destinationName: parentObjectMapping.destinationName,
@@ -298,16 +343,19 @@ class Destination {
       if (objectMapping.accessToken) {
         destination["jwt"] = accessToken;
       }
-      core.executeHttpRequest(
-        destination,
-        { method: "POST", url: url, data: body },
-        { fetchCsrfToken: true }
-      ).then((response) => {
-        resolve(response);
-      }).catch((error) => {
-        logger.error("createObject error", error);
-        reject(error);
-      });
+      core
+        .executeHttpRequest(
+          destination,
+          { method: "POST", url: url, data: body },
+          { fetchCsrfToken: true }
+        )
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          logger.error("createObject error", error);
+          reject(error);
+        });
     });
   }
 }

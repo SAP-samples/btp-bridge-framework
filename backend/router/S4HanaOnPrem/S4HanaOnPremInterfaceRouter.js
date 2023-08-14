@@ -1,11 +1,12 @@
 const Router = require("express");
 const S4HanaOnPremiseInterfaceRouter = Router();
 
-const OnPremIntegrationSuiteAuthRouter = require("./OnPremIntegrationSuiteAuthRouter");
-const OnPremIntegrationSuiteRouter = require("./OnPremIntegrationSuiteRouter");
-const OnPremDestinationAuthRouter = require("./OnPremDestinationAuthRouter");
-const OnPremDestinationRouter = require("./OnPremDestinationRouter");
 const ConfigInterface = require("../../helpers/configInterface");
+const OnPremDestinationRouter = require("./Interface/OnPremDestinationRouter");
+const OnPremIntegrationSuiteRouter = require("./Interface/OnPremIntegrationSuiteRouter");
+
+const OnPremIntegrationSuiteAuthRouter = require("./Auth/OnPremIntegrationSuiteAuthRouter");
+const OnPremDestinationAuthRouter = require("./Auth/OnPremDestinationAuthRouter");
 
 const getInterfaceMappingConfig = function (req, res, next) {
   console.log("Inside get interface mapping for onprem");
@@ -26,6 +27,7 @@ const getInterfaceMappingConfig = function (req, res, next) {
   });
 };
 
+// MS Teams routes
 S4HanaOnPremiseInterfaceRouter.use(
   "/IntegrationSuite",
   getInterfaceMappingConfig,

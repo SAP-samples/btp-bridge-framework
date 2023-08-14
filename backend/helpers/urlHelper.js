@@ -1,57 +1,81 @@
 class UrlHelper {
+  generateFirstLevelRequestUrl(objectMapping, id, query) {
+    let url = "";
+    if (
+      objectMapping.hasOwnProperty("pathParams") &&
+      objectMapping.pathParams.length > 0
+    ) {
+      console.log("has path params");
+      let map = new Map();
+      Object.keys(query).forEach((key) => {
+        map.set(key, query[key]);
+      });
 
-    generateFirstLevelRequestUrl(objectMapping, id, query) {
-
-        let url = "";
-        if (objectMapping.hasOwnProperty("pathParams") && objectMapping.pathParams.length > 0) {
-
-            let map = new Map();
-            Object.keys(query).forEach((key) => {
-                map.set(key, query[key]);
-            });
-
-            url = objectMapping.url + "(";
-            for (let i = 0; i < objectMapping.pathParams.length; i++) {
-
-                if (i !== objectMapping.pathParams.length - 1) {
-                    url += (objectMapping.pathParams[i] + "='" + map.get(objectMapping.pathParams[i]) + "',");
-                } else {
-                    url += (objectMapping.pathParams[i] + "='" + map.get(objectMapping.pathParams[i]) + "')");
-                }
-            }
+      url = objectMapping.url + "(";
+      for (let i = 0; i < objectMapping.pathParams.length; i++) {
+        if (i !== objectMapping.pathParams.length - 1) {
+          url +=
+            objectMapping.pathParams[i] +
+            "='" +
+            map.get(objectMapping.pathParams[i]) +
+            "',";
         } else {
-            url = `${objectMapping.url}('${id}')`;
+          url +=
+            objectMapping.pathParams[i] +
+            "='" +
+            map.get(objectMapping.pathParams[i]) +
+            "')";
         }
-
-        return url;
+      }
+    } else {
+      console.log("no path params");
+      url = `${objectMapping.url}('${id}')`;
     }
 
-    generateSecondLevelRequestUrl(businessObject, id, businessObjectItem,
-        itemId, objectItemMapping, query) {
+    console.log("generated url", url);
+    return url;
+  }
 
-        let url = "";
-        if (objectItemMapping.hasOwnProperty("pathParams") && objectItemMapping.pathParams.length > 0) {
+  generateSecondLevelRequestUrl(
+    businessObject,
+    id,
+    businessObjectItem,
+    itemId,
+    objectItemMapping,
+    query
+  ) {
+    let url = "";
+    if (
+      objectItemMapping.hasOwnProperty("pathParams") &&
+      objectItemMapping.pathParams.length > 0
+    ) {
+      let map = new Map();
+      Object.keys(query).forEach((key) => {
+        map.set(key, query[key]);
+      });
 
-            let map = new Map();
-            Object.keys(query).forEach((key) => {
-                map.set(key, query[key]);
-            });
-
-            url = objectItemMapping.url + "(";
-            for (let i = 0; i < objectItemMapping.pathParams.length; i++) {
-
-                if (i !== objectItemMapping.pathParams.length - 1) {
-                    url += (objectItemMapping.pathParams[i] + "='" + map.get(objectItemMapping.pathParams[i]) + "',");
-                } else {
-                    url += (objectItemMapping.pathParams[i] + "='" + map.get(objectItemMapping.pathParams[i]) + "')");
-                }
-            }
+      url = objectItemMapping.url + "(";
+      for (let i = 0; i < objectItemMapping.pathParams.length; i++) {
+        if (i !== objectItemMapping.pathParams.length - 1) {
+          url +=
+            objectItemMapping.pathParams[i] +
+            "='" +
+            map.get(objectItemMapping.pathParams[i]) +
+            "',";
         } else {
-            url = `${objectItemMapping.url}(${businessObject}='${id}',${businessObjectItem}='${itemId}')`;
+          url +=
+            objectItemMapping.pathParams[i] +
+            "='" +
+            map.get(objectItemMapping.pathParams[i]) +
+            "')";
         }
-
-        return url;
+      }
+    } else {
+      url = `${objectItemMapping.url}(${businessObject}='${id}',${businessObjectItem}='${itemId}')`;
     }
+
+    return url;
+  }
 }
 
 module.exports = new UrlHelper();
