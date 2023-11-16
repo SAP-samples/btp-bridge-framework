@@ -1,5 +1,3 @@
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-bridge-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-bridge-framework)
-
 # Bridge Framework – SAP BTP Framework for integrating communication platforms with SAP
 
 [![REUSE status](https://api.reuse.software/badge/github.com/sap-samples/btp-bridge-framework)](https://api.reuse.software/info/github.com/sap-samples/btp-bridge-framework)
