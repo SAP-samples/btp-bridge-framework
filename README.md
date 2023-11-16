@@ -2,6 +2,8 @@
 
 # Bridge Framework – SAP BTP Framework for integrating communication platforms with SAP
 
+[![REUSE status](https://api.reuse.software/badge/github.com/sap-samples/btp-bridge-framework)](https://api.reuse.software/info/github.com/sap-samples/btp-bridge-framework)
+
 ![Bridge Framework Image](./documentation/images/bridge-framework-main.png)
 
 ## What is the Bridge Framework?
@@ -46,6 +48,14 @@ Optional:
 | Table styling improvements | Tables are now scrollable, can display images, and include more options for changing the styling of rows       |
 | Transcript summarization   | Automatic transcript summarization for scheduled meetings can be enabled                                       |
 
+## Contributing
+
+For more information about how to contribute, see our [Contribution Guidelines](CONTRIBUTING.md).
+
+## Code of Conduct
+
+Members, contributors, and leaders pledge to make participation in our community a harassment-free experience. By participating in this project, you agree to always abide by its [Code of Conduct](https://github.com/SAP/.github/blob/main/CODE_OF_CONDUCT.md).
+
 ## License
 
-Copyright (c) 2023 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the SAP Sample Code License Agreement v1.0 except as noted otherwise in the [LICENSE](LICENSE) file.
+Copyright (c) 2023 SAP SE or an SAP affiliate company. See our [LICENSE](LICENSE) for copyright and license information. Detailed information, including third-party components and their licensing/copyright information, is available [via the REUSE tool](https://api.reuse.software/info/github.com/SAP-samples/btp-bridge-framework).
